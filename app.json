@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "Aylus Hour Tracker",
+    "icon": "./assets/images/icon.png",
+    "version": "1.0.0",
+    "scheme": "myapp",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "slug": "aylus-hour-tracker",
+    "platforms": [
+      "android",
+      "ios"
+     ],
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "bundleIdentifier": "com.aaardvark.aylus-hour-tracker",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.aaardvark.aylus_hour_tracker",
+      "versionCode": 1
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
+  }
+}
