@@ -10,7 +10,7 @@
     "platforms": [
       "android",
       "ios"
-     ],
+    ],
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",

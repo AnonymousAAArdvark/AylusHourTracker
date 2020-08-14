@@ -1,4 +1,4 @@
-package com.aylushourtracker;
+package com.aaardvark.aylus_hour_tracker;
 import android.content.res.Configuration;
 import android.content.Intent;
 

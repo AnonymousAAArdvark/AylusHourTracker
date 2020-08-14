@@ -1,4 +1,4 @@
-package com.aylushourtracker.generated;
+package com.aaardvark.aylus_hour_tracker.generated;
 
 import java.util.Arrays;
 import java.util.List;

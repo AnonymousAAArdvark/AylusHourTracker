@@ -1,4 +1,4 @@
-package com.aylushourtracker;
+package com.aaardvark.aylus_hour_tracker;
 
 import android.app.Application;
 import android.content.Context;
@@ -11,7 +11,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.aylushourtracker.generated.BasePackageList;
+import com.aaardvark.aylus_hour_tracker.generated.BasePackageList;
 
 import org.unimodules.adapters.react.ReactAdapterPackage;
 import org.unimodules.adapters.react.ModuleRegistryAdapter;
