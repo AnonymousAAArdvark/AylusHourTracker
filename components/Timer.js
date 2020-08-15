@@ -91,10 +91,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   elapsedTime: {
-    fontSize: 40,
+    fontSize: 55,
     fontWeight: 'bold',
     textAlign: 'center',
-    paddingVertical: 15,
+    paddingVertical: 5,
   },
   buttonGroup: {
     flexDirection: 'row',

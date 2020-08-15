@@ -1,31 +1,23 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  StatusBar,
-  SafeAreaView,
-  AsyncStorage,
-} from 'react-native';
+import { View, Text, Image, StyleSheet, StatusBar, SafeAreaView, AsyncStorage, Platform} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 const data = [
   {
     title: 'Hour Tracker',
     text: 'Track hours spent on volunteering events,\n and save them for future reference.',
-    image: require('../assets/images/one.png'),
+    image: Platform.OS === 'ios' ? (require('../assets/images/ione.png')):(require('../assets/images/eone.png')),
     bg: 'firebrick',
   },
   {
     title: 'Events Summary',
-    text: 'Create, edit, and remove saved events.\n Toggle bottom right button for compact or loose view.',
-    image: require('../assets/images/two.png'),
+    text: 'Create, edit, and remove saved events. Toggle bottom right button for compact or loose view.',
+    image: Platform.OS === 'ios' ? (require('../assets/images/itwo.png')):(require('../assets/images/etwo.png')),
     bg: 'lightslategrey',
   },
   {
     title: 'Calculate PVSA Awards',
     text: 'Determine total hours worked, current award earned, and hours needed for the next reward.',
-    image: require('../assets/images/three.png'),
+    image: Platform.OS === 'ios' ? (require('../assets/images/ithree.png')):(require('../assets/images/ethree.png')),
     bg: '#b80f30',
   },
 ];
@@ -37,26 +29,27 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: "flex-start",
-    paddingBottom: 96, // Add padding to offset large buttons and pagination in bottom of page
+    paddingTop: '5%', // Add padding to offset large buttons and pagination in bottom of page
   },
   text: {
     color: 'white',
     textAlign: 'center',
     fontSize: 20,
-    marginTop: 10,
+    lineHeight: 25,
+    marginTop: '2%',
     paddingLeft: 30,
     paddingRight: 30,
   },
   image: {
     //width: '100%',
     resizeMode: 'contain',
-    height: '60%',
-    marginTop: 15,
-    marginBottom: 10,
+    height: '70%',
+    marginTop: '2%',
+    marginBottom: '1%',
 
   },
   title: {
-    marginTop: 20,
+    marginTop: '1%',
     fontSize: 35,
     color: 'white',
     textAlign: 'center',
@@ -67,7 +60,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     bottom: 0,
-    zIndex: 9999,
+    //zIndex: 9999,
     flex: 1,
   },
 });

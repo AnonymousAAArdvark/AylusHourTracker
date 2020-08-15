@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableHighlight, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Text, TouchableHighlight, Platform } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { millisecondsToHuman } from '../utils/TimerUtils';
 import TimerButton from './TimerButton';
@@ -56,7 +56,7 @@ export default class MainTimer extends React.Component {
        return(
         <View style={styles.container}>
         <TouchableHighlight style={styles.pauseButton} alignContent='center' underlayColor='#00f23a' onPress={this.handleStopPress}>
-          <FontAwesome style={styles.pauseIcon} name="pause" size={80} color='white' />
+          <FontAwesome style={styles.pauseIcon} name="pause" size={95} color='white' />
         </TouchableHighlight> 
         </View>
        )
@@ -65,7 +65,7 @@ export default class MainTimer extends React.Component {
      return (
       <View style={styles.container}>
       <TouchableHighlight style={styles.resumeButton} alignContent='center' underlayColor='#ff1212' onPress={this.handleStartPress}>
-        <FontAwesome style={styles.resumeIcon} name="play" size={85} color='white' />
+        <FontAwesome style={styles.resumeIcon} name="play" size={100} color='white' />
       </TouchableHighlight> 
       </View>
      )
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     fontSize: 70,
     fontWeight: 'bold',
     textAlign: 'center',
-    paddingVertical: 25,
+    paddingVertical: '5%',
   },
   buttonGroup: {
     flexDirection: 'row',
@@ -152,33 +152,33 @@ const styles = StyleSheet.create({
   pauseButton: {
     borderRadius: 100,
     borderWidth: 4,
-    width: 120,
-    height: 120,
+    width: 135,
+    height: 135,
     backgroundColor: '#21BA45'
   },
   resumeButton: {
     borderRadius: 100,
     borderWidth: 4,
-    width: 120,
-    height: 120,
+    width: 135,
+    height: 135,
     backgroundColor: '#DB2828'
   },
   container: {
     flex: 1,
     alignItems: 'center',
     paddingHorizontal: 10,
-    marginTop: 55,
+    marginTop: '21%',
   },
   pauseIcon: {
     alignItems: 'stretch',
     justifyContent: 'center',
-    marginLeft: 21,
-    marginTop: 15
+    marginLeft: 22,
+    marginTop: 16,
   },
   resumeIcon: {
     alignItems: 'stretch',
     justifyContent: 'center',
-    marginLeft: 29,
-    marginTop: 15
+    marginLeft: 32,
+    marginTop: 14
   },
 })

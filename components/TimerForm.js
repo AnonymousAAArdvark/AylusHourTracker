@@ -35,9 +35,9 @@ export default class TimerForm extends React.Component {
     this.setState({ showDuration: true });
    }
    handleDatePicked = value => {
+    this.hideDateTimePicker();
     this.setState({ value:value });
     this.setState({ date: getFormattedDate(value)})
-    this.hideDateTimePicker();
    }
    handleTitleChange = title => {
      this.setState({ title });
@@ -76,7 +76,18 @@ export default class TimerForm extends React.Component {
        selectedHours,
      });
    }
-
+   renderDatePicker() {
+    const {label, show, mode, displayFormat, value } = this.state;
+     return(
+      <DateTimePicker
+        date={Platform.OS === 'ios' ? (value ? new Date(value) : new Date()):(value ? new Date() : new Date())}
+        isVisible={show}
+        mode={mode}
+        onConfirm={this.handleDatePicked}
+        onCancel={this.hideDateTimePicker}
+      />
+     )
+   }
 
   render(){
     let { id, onFormClose} = this.props;
@@ -100,6 +111,12 @@ export default class TimerForm extends React.Component {
         </View>
           <View style={[styles.button, { borderColor: 'black' }]}>
             <Button title="Pick Date" color="black" onPress={this.showDateTimePicker} />
+            <DateTimePicker
+              isVisible={show}
+              mode={mode}
+              onConfirm={this.handleDatePicked}
+              onCancel={this.hideDateTimePicker}
+            />
           </View>
         <View style={[styles.button, { borderColor: 'black' }]}>
           <Button title="Pick Time Duration" color="black" onPress={this.showDurationPicker} />
@@ -109,13 +126,6 @@ export default class TimerForm extends React.Component {
           <TimerButton small color="#21BA45" title={submitText} onPress={this.handleSubmit}/>
           <TimerButton small color="#DB2828" title="Cancel" onPress={onFormClose}/>
         </View>
-        <DateTimePicker
-              date={value ? new Date(value) : new Date()}
-              isVisible={show}
-              mode={mode}
-              onConfirm={this.handleDatePicked}
-              onCancel={this.hideDateTimePicker}
-            />
       </View>
     )
   }
