@@ -86,15 +86,18 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: 'bold',
+    color: 'black',
   },
   date: {
     fontSize: 20,
+    color: 'black',
   },
   elapsedTime: {
     fontSize: 55,
     fontWeight: 'bold',
     textAlign: 'center',
     paddingVertical: 5,
+    color: 'black',
   },
   buttonGroup: {
     flexDirection: 'row',

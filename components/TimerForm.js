@@ -151,11 +151,13 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   textInput: {
+    color: 'black',
     height: 40,
     padding: 5,
     fontSize: 20,
   },
   textInputTitle: {
+    color: 'black',
     fontSize: 15,
     fontWeight: 'bold',
     marginBottom: 5
@@ -178,12 +180,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textGroup: {
+    color: 'black',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignSelf: 'stretch',
     width: '100%',
   },
   textDuration: {
+    color: 'black',
     textAlign: 'center',
     fontSize: 20,
   }

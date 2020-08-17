@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
 
     // Adding padding on Text component.
     padding : 2,
-
+    color: 'black',
     fontSize: 25,
     margin: 10
 },
