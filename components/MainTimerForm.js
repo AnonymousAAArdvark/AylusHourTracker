@@ -107,7 +107,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderColor: '#D6D7DA',
     borderWidth: 0,
-    borderRadius: 10,
     padding: 15,
     margin: 0,
     width: '100%',
@@ -121,7 +120,7 @@ const styles = StyleSheet.create({
   textInputContainer: {
     borderColor: '#D6D7DA',
     borderRadius: 2,
-    borderWidth: 1,
+    borderWidth: 2,
     marginBottom: 5,
     marginTop: 4,
     height: 50,

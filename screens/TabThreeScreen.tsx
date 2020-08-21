@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, Image, View, ScrollView, Text, KeyboardAvoidingView, AsyncStorage, ImageBackground, Platform } from 'react-native';
-import uuidv4 from 'uuid/v4';
-import moment from 'moment'
+import { StyleSheet, Image, View, ScrollView, Text, TextInput, KeyboardAvoidingView, AsyncStorage, ImageBackground, Platform } from 'react-native';
 import {millisecondsToHours} from '../utils/TimerUtils';
+import humanToMiliseconds from '../utils/TimerUtils';
 import { Ionicons, FontAwesome5} from '@expo/vector-icons';
 import background from '../assets/images/back.png'
-
+import AwardModal from '../components/AwardModal'
+import ProfileSelector from '../components/ProfileSelector'
+import ModalSelector from 'react-native-modal-selector'
 
 const sum = function(items, prop){
     return items.reduce( function(a, b){
@@ -20,6 +21,7 @@ export default class App extends React.Component {
       bronzeTime: 180000000,
       silverTime: 360000000,
       goldTime: 540000000,
+      myNumber: '',
   }
   async componentDidMount() {
     const { timers } = this.state;
@@ -66,6 +68,21 @@ export default class App extends React.Component {
     console.log('screen 3 component umounted')
     clearInterval(this.intervalId);
   }
+  setGoldHours(setGoldTime){
+    this.setState({
+      goldTime: humanToMiliseconds(setGoldTime,0,0)
+    })
+  }
+  setSilverHours(setSilverTime){
+    this.setState({
+      silverTime: humanToMiliseconds(setSilverTime,0,0)
+    })
+  }
+  setBronzeHours(setBronzeTime){
+    this.setState({
+      bronzeTime: humanToMiliseconds(setBronzeTime,0,0)
+    })
+  }
   renderHoursWorked = () => {
     const { totalTime } = this.state
     if(totalTime >= this.state.goldTime){
@@ -77,7 +94,6 @@ export default class App extends React.Component {
           <Text style={[styles.goldText, styles.bold]}>Gold!</Text>
         </Text>
       )
-
     }
     else if(totalTime >= this.state.silverTime){
       return(
@@ -119,6 +135,7 @@ export default class App extends React.Component {
 
   render() {
     const { timers, totalTime } = this.state;
+
     return(
       <View style={styles.appContainer}>
         <ImageBackground source={background} style={styles.image} imageStyle={{opacity:0.1}}>
@@ -138,8 +155,14 @@ export default class App extends React.Component {
                   <FontAwesome5 name="medal" size={40} color='#cd7f32' />
                   <Text style={[styles.TextComponentStyle, styles.bronzeText]}>Bronze Award</Text>
                 </View>
+
                 { this.renderHoursWorked() }
             </View>
+            <AwardModal
+              getGoldHours={ getGold => this.setGoldHours(getGold)}
+              getSilverHours={ getSilver => this.setSilverHours(getSilver)}
+              getBronzeHours={ getBronze => this.setBronzeHours(getBronze)}
+            />
           </ScrollView>
         </KeyboardAvoidingView>
         </ImageBackground>
@@ -153,6 +176,7 @@ const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
   },
+
   timerList: {
     paddingBottom: 15,
   },
