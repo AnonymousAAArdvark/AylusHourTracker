@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Alert, StyleSheet, Text, TouchableHighlight, View, Button, TextInput, AsyncStorage} from "react-native";
+import { Alert, StyleSheet, Text, TouchableHighlight, View, Button, Platform, AsyncStorage} from "react-native";
 import Modal from 'react-native-modal';
 import ModalSelector from 'react-native-modal-selector'
 
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     },
     openButton: {
       backgroundColor: "crimson",
-      borderRadius: 10,
+      borderRadius: 5,
       padding: 10,
       elevation: 2,
     },
