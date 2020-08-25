@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, Button, Platform, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Button, Platform, TouchableOpacity } from 'react-native';
 import DateTimePicker from "react-native-modal-datetime-picker";
 import TimerButton from './TimerButton';
 import getFormattedDate from '../utils/getFormattedDate'
@@ -48,16 +48,25 @@ export default class MainTimerForm extends React.PureComponent {
     const { id } = this.props;
     if (id){
       return(
-          <View style={[styles.updateButton, { borderColor: '#21BA45' }]}>
-            <Button color="#21BA45" height='50%' title={id ? 'Update' : 'Create'} onPress={this.handleSubmit}/>
-          </View>
-  
+        <View style={styles.updateButton}>
+          <TouchableOpacity
+            style={{ backgroundColor: "transparent", padding:10, justifyContent:'center', alignItems:'center', borderRadius:3, borderColor:'#21BA45', borderWidth:2}}
+            onPress={this.handleSubmit}
+          >
+          <Text style={{fontSize:20, color:'#21BA45'}}>{id ? 'Update' : 'Create'}</Text>
+          </TouchableOpacity>
+        </View>
       )
     }
 
     return (
-      <View style={[styles.createButton, { borderColor: '#21BA45' }]}>
-        <Button color="#21BA45" title={id ? 'Update' : 'Create'} onPress={this.handleSubmit}/>
+      <View style={styles.createButton}>
+        <TouchableOpacity
+          style={{ backgroundColor: "transparent", padding:10, justifyContent:'center', alignItems:'center', borderRadius:3, borderColor:'#21BA45', borderWidth:2}}
+          onPress={this.handleSubmit}
+        >
+          <Text style={{fontSize:20, color:'#21BA45'}}>{id ? 'Update' : 'Create'}</Text>
+        </TouchableOpacity>
       </View>
     )
  }
@@ -92,11 +101,14 @@ export default class MainTimerForm extends React.PureComponent {
           </View>
           <Text style={styles.textInputTitle}>Date</Text>
         </View>
-        <View style={[styles.button, { borderColor: 'crimson' }]}>
-            <Button title="Pick Date (default is today)" color="crimson" onPress={this.showDateTimePicker} />
-            {this.renderDatePicker()}
-        </View>
-           {this.renderSubmitButton()}
+        <TouchableOpacity
+          style={{ backgroundColor: "transparent", padding:10, justifyContent:'center', alignItems:'center', borderRadius:3, marginBottom:10, borderColor:'crimson', borderWidth:2}}
+          onPress={this.showDateTimePicker}
+          >
+          <Text style={{fontSize:20, color:'crimson'}}>Pick Date (default is today)</Text>
+        </TouchableOpacity>
+          {this.renderDatePicker()}
+          {this.renderSubmitButton()}
       </View>
     )
   }
@@ -141,24 +153,15 @@ const styles = StyleSheet.create({
   createButton: {
     marginTop: 10,
     minWidth: 100,
-    height: Platform.OS === 'ios' ? 50:40,
-    
+    height: 50,
     width: '100%',
-    borderWidth: 2,
-    borderRadius: 3,
-    
-    fontWeight: 'bold',
     position: 'absolute',
     bottom:84,
     left:"4%",
   },
   updateButton: {
     marginTop: 10,
-    minWidth: 100,
-    height: Platform.OS === 'ios' ? 50:40,
     width: '100%',
-    borderWidth: 2,
-    borderRadius: 3,
     fontWeight: 'bold',
     position: 'absolute',
     bottom:31,

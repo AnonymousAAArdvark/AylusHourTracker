@@ -54,49 +54,102 @@ export default class TimePickerModal extends React.Component {
          
         }
       }
+    renderPicker() {
+        if(Platform.OS == 'ios'){
+            return(
+                <Modal
+                    isVisible={this.state.showDuration}
+                    animationType="slide"
+                    style={{ justifyContent: 'flex-end' }}
+                    avoidKeyboard={true}
+                    backdropOpacity={.5}
+                    onBackdropPress={this.setModalCancel}
+                    animationOutTiming={500}
+                    hasBackdrop={true}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                    }}
+                >
+                    <View style={styles.modalView}>
+                        <View style={styles.headerView}>
+                            <Text style={{...styles.textStyle, color:'grey', fontWeight:'normal'}}>Pick a Time Duration</Text>
+                        </View>
+                        {this.renderDurationPicker()}
+                        <TouchableHighlight
+                            underlayColor="#d4d4d4" 
+                            style={{ ...styles.openButton, backgroundColor: "#eeeeee", borderTopWidth:.5, borderColor:'#aeaeae', width:'100%', height:55, borderTopLeftRadius: 0, borderTopRightRadius: 0}}
+                            onPress={this.setModalNotVisible}
+                            >
+                            <Text style={{...styles.textStyle, color: "#147EFB", fontWeight:'normal', }}>Confirm</Text>
+                        </TouchableHighlight>
+                    </View>
+                    <View style={styles.cancelView}>
+                        <TouchableHighlight
+                            underlayColor="#d4d4d4" 
+                            style={{ ...styles.openButton, backgroundColor: "#eeeeee", width:'100%', height:55}}
+                            onPress={this.setModalCancel}
+                            >
+                            <Text style={{...styles.textStyle, color:'#147EFB'}}>Cancel</Text>
+                        </TouchableHighlight>
+                    </View>
+                </Modal>
+            )
+        }
+        else{
+            return(
+                <Modal
+                    isVisible={this.state.showDuration}
+                    animationIn={'fadeIn'}
+                    animationInTiming={200}
+                    animationOutTiming={200}
+                    animationOut={'fadeOut'}
+                    style={{ justifyContent: 'center' }}
+                    avoidKeyboard={true}
+                    backdropOpacity={.5}
+                    onBackdropPress={this.setModalCancel}
+                    animationOutTiming={500}
+                    hasBackdrop={true}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                    }}
+                >
+                    <View style={{...styles.modalView, margin:'8%', borderRadius:3, backgroundColor:'white'}}>
+                        <View style={{...styles.headerView, backgroundColor:'#1177BB', borderRadius:3, height:70,}}>
+                            <Text style={{...styles.textStyle, color:'white', fontWeight:'normal', fontSize:26, }}>Pick a Time Duration</Text>
+                        </View>
+                        {this.renderDurationPicker()}
+                        <View style={styles.buttonRow}>
+                            <TouchableHighlight
+                                underlayColor="#d4d4d4" 
+                                style={{ ...styles.openButton, borderRadius:5, backgroundColor: "white", width:70, height:45}}
+                                onPress={this.setModalCancel}
+                                >
+                                <Text style={{...styles.textStyle, color:'#1E72BC', fontWeight:'normal', fontSize: 15,}}>CANCEL</Text>
+                            </TouchableHighlight>
+                            <TouchableHighlight
+                                underlayColor="#d4d4d4" 
+                                style={{ ...styles.openButton, borderRadius:5, backgroundColor: "white", width:60, height:45}}
+                                onPress={this.setModalNotVisible}
+                                >
+                                <Text style={{...styles.textStyle, color: "#2673B4", fontWeight:'normal', fontSize: 15,}}>OK</Text>
+                            </TouchableHighlight>
+                        </View>
+                    </View>
+                </Modal>
+            )
+        }
+    }
     render(){
         return(
             <View>
-                <View style={[styles.button, { borderColor: 'black' }]}>
-                    <Button title="Pick Time Duration" color="black" onPress={this.showDurationPicker} />
-                </View>
-                <View style={styles.centeredView}>
-                    <Modal
-                        isVisible={this.state.showDuration}
-                        animationType="slide"
-                        style={{ justifyContent: 'flex-end' }}
-                        avoidKeyboard={true}
-                        backdropOpacity={.5}
-                        onBackdropPress={this.setModalCancel}
-                        animationOutTiming={500}
-                        hasBackdrop={true}
-                        onRequestClose={() => {
-                            Alert.alert("Modal has been closed.");
-                        }}
+                <TouchableOpacity
+                    style={{ backgroundColor: "transparent", padding:8, alignItems:'center', borderRadius:3, borderColor:'black', borderWidth:2}}
+                    onPress={this.showDurationPicker}
                     >
-                        <View style={styles.modalView}>
-                            <View style={styles.headerView}>
-                                <Text style={{...styles.textStyle, color:'grey', fontWeight:'normal'}}>Pick a Time Duration</Text>
-                            </View>
-                            {this.renderDurationPicker()}
-                            <TouchableHighlight
-                                underlayColor="#d4d4d4" 
-                                style={{ ...styles.openButton, backgroundColor: "#eeeeee", borderTopWidth:.5, borderColor:'#aeaeae', width:'100%', height:55, borderTopLeftRadius: 0, borderTopRightRadius: 0}}
-                                onPress={this.setModalNotVisible}
-                                >
-                                <Text style={{...styles.textStyle, color: "#147EFB", fontWeight:'normal', }}>Confirm</Text>
-                            </TouchableHighlight>
-                        </View>
-                        <View style={styles.cancelView}>
-                            <TouchableHighlight
-                                underlayColor="#d4d4d4" 
-                                style={{ ...styles.openButton, backgroundColor: "#eeeeee", width:'100%', height:55}}
-                                onPress={this.setModalCancel}
-                                >
-                                <Text style={{...styles.textStyle, color:'#147EFB'}}>Cancel</Text>
-                            </TouchableHighlight>
-                        </View>
-                    </Modal>
+                    <Text style={{fontSize:20, color:'black'}}>Pick Time Duration</Text>
+                </TouchableOpacity>
+                <View style={styles.centeredView}>
+                    {this.renderPicker()}
                 </View>
             </View>
         )
@@ -141,7 +194,7 @@ const styles = StyleSheet.create({
       openButton: {
         borderRadius: 10,
         justifyContent: 'center',
-        elevation: 2,
+        elevation: 0,
         marginLeft: 0,
         width: 100,
       },
@@ -173,9 +226,9 @@ const styles = StyleSheet.create({
       },
       buttonRow: {
         width: '100%',
-        height: 50,
-        paddingTop: 10,
-        justifyContent: "space-between",
+        height: 55,
+        paddingRight: 10,
+        justifyContent: "flex-end",
         flexDirection: 'row',
       },
 })

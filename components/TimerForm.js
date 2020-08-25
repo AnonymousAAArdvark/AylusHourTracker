@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Button, TouchableHighlight, TouchableOpacity } from 'react-native';
 import DateTimePicker from "react-native-modal-datetime-picker";
 import TimerButton from './TimerButton';
 import TimePickerModal from './TimePickerModal';
@@ -110,15 +110,18 @@ export default class TimerForm extends React.Component {
             />
           </View>
         </View>
-          <View style={[styles.button, { borderColor: 'black' }]}>
-            <Button title="Pick Date" color="black" onPress={this.showDateTimePicker} />
-            <DateTimePicker
-              isVisible={show}
-              mode={mode}
-              onConfirm={this.handleDatePicked}
-              onCancel={this.hideDateTimePicker}
-            />
-          </View>
+          <TouchableOpacity
+            style={{ backgroundColor: "transparent", padding:8, alignItems:'center', borderRadius:3, marginBottom:10, borderColor:'black', borderWidth:2}}
+            onPress={this.showDateTimePicker}
+            >
+            <Text style={{fontSize:20, color:'black'}}>Pick Date</Text>
+          </TouchableOpacity>
+          <DateTimePicker
+            isVisible={show}
+            mode={mode}
+            onConfirm={this.handleDatePicked}
+            onCancel={this.hideDateTimePicker}
+          />
           <TimePickerModal/>
         <View style={styles.buttonGroup}>
           <TimerButton small color="#21BA45" title={submitText} onPress={this.handleSubmit}/>

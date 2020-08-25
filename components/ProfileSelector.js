@@ -70,8 +70,7 @@ export default class ProfileSelector extends React.Component {
           selectLabel: option.label,
       })
   }
-
-  render() {
+  renderSelector() {
     let index = 0;
     const {selectKey, selectLabel} = this.state
     const data = [
@@ -84,34 +83,76 @@ export default class ProfileSelector extends React.Component {
         { key: index++, label: 'Custom' },
 
     ];
+    if(Platform.OS == 'ios'){
+      return (
+        <View>
+          <ModalSelector
+              data={data}
+              touchableActiveOpacity={.7}
+              initValue={'you selected ' + selectLabel + ''}
+              initValueTextStyle={{color: "black"}}
+              overlayStyle={{ justifyContent: 'flex-end', opacity:1, backgroundColor:'rgba(1,1,1,0.7)' }}
+              sectionTextStyle={{color: 'grey', fontSize: 20}}
+              cancelTextStyle={{color: '#147EFB', fontSize: 20, fontWeight:'bold'}}
+              selectStyle={{borderColor: "black"}}
+              optionTextStyle={{color: "black", fontSize: 20}}
+              childrenContainerStyle={{ opacity:1}}
+              optionContainerStyle={{ opacity:1, backgroundColor:'#e6e6e6', borderRadius:10 }}
+              cancelStyle={{backgroundColor:'#e6e6e6', height:50, justifyContent: 'center', borderRadius:10 }}
+              sectionStyle={{height:60, justifyContent: 'center'}}
+              optionStyle={{height:50, justifyContent: 'center'}}
+              cancelText={'Cancel'}
+              closeOnChange={true}
+              onChange={(option) => {this.handleChange(option)}}
+          >
+              <TouchableHighlight
+                  underlayColor="limegreen"
+                  style={{ ...styles.openButton, backgroundColor: "#3b3b3b", }}
+                  >
+                  <Text style={styles.textStyle}>Current Profile: {selectLabel}</Text>
+              </TouchableHighlight>
+          </ ModalSelector>
+        </View>
+      )
+    }
+    else {
+      return (
+        <View>
+          <ModalSelector
+              data={data}
+              touchableActiveOpacity={.7}
+              animationType={'fade'}
+              initValue={'you selected ' + selectLabel + ''}
+              initValueTextStyle={{color: "black"}}
+              overlayStyle={{ justifyContent: 'center', opacity:1, backgroundColor:'rgba(1,1,1,0.7)' }}
+              sectionTextStyle={{color: '#1177BB', fontSize: 20}}
+              cancelTextStyle={{color: 'crimson', fontSize: 17, fontWeight:'bold'}}
+              selectStyle={{borderColor: "black"}}
+              optionTextStyle={{color: "black", fontSize: 20}}
+              childrenContainerStyle={{ opacity:1}}
+              optionContainerStyle={{ opacity:1, margin:'5%', backgroundColor:'white', borderRadius:3, borderBottomLeftRadius:0, borderBottomRightRadius:0 }}
+              cancelStyle={{backgroundColor:'white', margin:'5%', marginTop:-10, height:50, borderRadius:3, justifyContent: 'center', borderColor:'lightgrey', borderTopWidth:1, borderTopRightRadius:0, borderTopLeftRadius:0 }}
+              sectionStyle={{height:60, justifyContent: 'center'}}
+              optionStyle={{height:50, justifyContent: 'center'}}
+              cancelText={'CANCEL'}
+              closeOnChange={true}
+              onChange={(option) => {this.handleChange(option)}}
+          >
+              <TouchableHighlight
+                  underlayColor="limegreen"
+                  style={{ ...styles.openButton, backgroundColor: "#3b3b3b", }}
+                  >
+                  <Text style={styles.textStyle}>Current Profile: {selectLabel}</Text>
+              </TouchableHighlight>
+          </ ModalSelector>
+        </View>
+      )
+    }
+  }
+  render() {
     return (
         <View style={styles.selectorContainer}>
-            <ModalSelector
-                data={data}
-                touchableActiveOpacity={.7}
-                initValue={'you selected ' + selectLabel + ''}
-                initValueTextStyle={{color: "black"}}
-                overlayStyle={{ justifyContent: 'flex-end', opacity:1, backgroundColor:'rgba(1,1,1,0.7)' }}
-                sectionTextStyle={{color: 'grey', fontSize: 20}}
-                cancelTextStyle={{color: '#147EFB', fontSize: 20, fontWeight:'bold'}}
-                selectStyle={{borderColor: "black"}}
-                optionTextStyle={{color: "black", fontSize: 20}}
-                childrenContainerStyle={{ opacity:1}}
-                optionContainerStyle={{ opacity:1, backgroundColor:'#e6e6e6', borderRadius:10 }}
-                cancelStyle={{backgroundColor:'#e6e6e6', height:50, justifyContent: 'center', borderRadius:10 }}
-                sectionStyle={{height:60, justifyContent: 'center'}}
-                optionStyle={{height:50, justifyContent: 'center'}}
-                cancelText={'Cancel'}
-                closeOnChange={true}
-                onChange={(option) => {this.handleChange(option)}}
-            >
-                <TouchableHighlight
-                    underlayColor="limegreen"
-                    style={{ ...styles.openButton, backgroundColor: "#3b3b3b", }}
-                    >
-                    <Text style={styles.textStyle}>Current Profile: {selectLabel}</Text>
-                </TouchableHighlight>
-            </ ModalSelector>
+            {this.renderSelector()}
         </View>
     )
   }
