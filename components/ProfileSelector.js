@@ -78,8 +78,8 @@ export default class ProfileSelector extends React.Component {
         { key: index++, label: 'Kids (5-10)' },
         { key: index++, label: 'Teens (11-15)' },
         { key: index++, label: 'Young Adults (16-25)' },
-        { key: index++, label: 'Adults (26 and Older)' },
-        { key: index++, label: 'Families and Groups' },
+        { key: index++, label: 'Adults (26 and Up)' },
+        { key: index++, label: 'Families & Groups' },
         { key: index++, label: 'Custom' },
 
     ];
@@ -107,9 +107,9 @@ export default class ProfileSelector extends React.Component {
           >
               <TouchableHighlight
                   underlayColor="limegreen"
-                  style={{ ...styles.openButton, backgroundColor: "#3b3b3b", }}
+                  style={{ borderRadius:5, borderColor: "#006cd6", padding:10, borderWidth:5, }}
                   >
-                  <Text style={styles.textStyle}>Current Profile: {selectLabel}</Text>
+                  <Text style={{color: "#006cd6", fontSize: 17, textShadowColor:'#b1b1b1', textShadowRadius:1, textShadowOffset:{width:1.5, height: 1.5}, fontWeight:'800', textAlign: "center"}}>Current Profile: {selectLabel}</Text>
               </TouchableHighlight>
           </ ModalSelector>
         </View>
@@ -140,9 +140,9 @@ export default class ProfileSelector extends React.Component {
           >
               <TouchableHighlight
                   underlayColor="limegreen"
-                  style={{ ...styles.openButton, backgroundColor: "#3b3b3b", }}
+                  style={{ borderRadius:5, borderColor: "#006cd6", padding:10, borderWidth:5, }}
                   >
-                  <Text style={styles.textStyle}>Current Profile: {selectLabel}</Text>
+                  <Text style={{color: "#006cd6", fontSize: 17, textShadowColor:'#b1b1b1', textShadowRadius:1, textShadowOffset:{width:1.5, height: 1.5}, fontWeight:'800', textAlign: "center"}}>Current Profile: {selectLabel}</Text>
               </TouchableHighlight>
           </ ModalSelector>
         </View>
@@ -166,7 +166,6 @@ const styles = StyleSheet.create({
       backgroundColor: "crimson",
       borderRadius: 5,
       padding: 10,
-      elevation: 2,
     },
     textStyle: {
       color: "white",

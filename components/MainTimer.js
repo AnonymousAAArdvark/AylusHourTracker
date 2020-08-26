@@ -4,7 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { millisecondsToHuman } from '../utils/TimerUtils';
 import TimerButton from './TimerButton';
 import { ConfirmDialog } from 'react-native-simple-dialogs';
-
+const Pulse = require('react-native-pulse').default;
 
 export default class MainTimer extends React.Component {
   state = {
@@ -55,6 +55,7 @@ export default class MainTimer extends React.Component {
      if (isRunning){
        return(
         <View style={styles.container}>
+          <Pulse color='#21BA45' numPulses={2} diameter={200} initialDiameter={135} speed={20} duration={1800} />
           <TouchableHighlight style={styles.pauseButton} alignContent='center' underlayColor='#2ed956' onPress={this.handleStopPress}>
             <FontAwesome style={styles.pauseIcon} name="pause" size={95} color='white' />
           </TouchableHighlight> 
@@ -64,7 +65,7 @@ export default class MainTimer extends React.Component {
 
      return (
       <View style={styles.container}>
-        <TouchableHighlight style={styles.resumeButton} alignContent='center' underlayColor='#e04949' onPress={this.handleStartPress}>
+        <TouchableHighlight style={styles.resumeButton} alignContent='center' underlayColor='#f73535' onPress={this.handleStartPress}>
           <FontAwesome style={styles.resumeIcon} name="play" size={100} color='white' />
         </TouchableHighlight> 
       </View>
@@ -157,14 +158,16 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     width: 135,
     height: 135,
-    backgroundColor: '#21BA45'
+    backgroundColor: '#21BA45',
+    borderColor:'#178531'
   },
   resumeButton: {
     borderRadius: 100,
     borderWidth: 4,
     width: 135,
     height: 135,
-    backgroundColor: '#DB2828'
+    backgroundColor: '#DB2828',
+    borderColor: '#9f1a1a',
   },
   container: {
     position: 'absolute',
