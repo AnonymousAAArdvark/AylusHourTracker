@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Button, Platform, TouchableOpacity } from 'react-native';
 import DateTimePicker from "react-native-modal-datetime-picker";
-import TimerButton from './TimerButton';
 import getFormattedDate from '../utils/getFormattedDate'
-export default class MainTimerForm extends React.PureComponent {
+import SwitchSelector from "react-native-switch-selector";
+
+export default class MainTimerForm extends React.Component {
    constructor(props) {
      super(props);
-     const { id, title, date } = props;
+     const { id, title, date, aylus } = props;
      this.state = {
        title: id ? title : '',
        date: id ? date : '',
+       aylus: id ? aylus : true,
        show: false,
        mode: 'date',
        displayFormat: 'DD/MM/YYYY',
        label: 'Date',
        value: '',
-       t: Date(),
      }
    }
    showDateTimePicker = () => {
@@ -36,12 +37,12 @@ export default class MainTimerForm extends React.PureComponent {
    
    handleSubmit = () => {
      const { onFormSubmit , id } = this.props;
-     const { title, date } = this.state;
-
+     const { title, date, aylus } = this.state;
      onFormSubmit({
        id,
        title,
-       date
+       aylus,
+       date,
      });
    }
    renderSubmitButton() {
@@ -82,15 +83,14 @@ export default class MainTimerForm extends React.PureComponent {
       />
      )
    }
+
   render(){
-    const { id, onFormClose } = this.props;
-    const { title, date } = this.state;
-    const submitText = id ? 'Update' : 'Create';
-    const {label, show, mode, displayFormat, value } = this.state;
+    const { id } = this.props;
+    const { title, aylus } = this.state;
     return(
       <View style={styles.formContainer}>
         <View style={styles.attributeContainer}>
-          <Text style={styles.textInputTitle}>Event Title</Text>
+          <Text style={styles.textInputTitle}>Title</Text>
           <View style={styles.textInputContainer}>
             <TextInput
               style={styles.textInput}
@@ -107,8 +107,29 @@ export default class MainTimerForm extends React.PureComponent {
           >
           <Text style={{fontSize:20, color:'crimson'}}>Pick Date (default is today)</Text>
         </TouchableOpacity>
-          {this.renderDatePicker()}
-          {this.renderSubmitButton()}
+        <Text style={styles.textInputTitle}>Event</Text>
+        <View style={{borderWidth:2, borderColor:'dodgerblue', borderRadius:3, height:47, marginTop:-0}}>
+          <SwitchSelector
+            initial={aylus ? 0:1}
+            onPress={value => this.setState({ aylus: value })}
+            textColor={"dodgerblue"} //'#7a44cf'
+            selectedColor={"white"}
+            buttonColor={"dodgerblue"}
+            borderColor={"dodgerblue"}
+            fontSize={17}
+            style={{marginTop:0}}
+            borderRadius={3}
+            borderWidth={0}
+            height={43}
+            hasPadding
+            options={[
+              { label: "AYLUS", value: true }, //images.feminino = require('./path_to/assets/img/feminino.png')
+              { label: "Not AYLUS", value: false } //images.masculino = require('./path_to/assets/img/masculino.png')
+            ]}
+          />
+        </View>
+        {this.renderDatePicker()}
+        {this.renderSubmitButton()}
       </View>
     )
   }

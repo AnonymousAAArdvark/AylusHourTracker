@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import { ConfirmDialog } from 'react-native-simple-dialogs';
 import { millisecondsToHuman } from '../utils/TimerUtils';
 import TimerButton from './TimerButton';
+import '../utils/global'
 
 export default class Timer extends React.Component {
   state = {
@@ -33,18 +34,39 @@ export default class Timer extends React.Component {
     const { isCompact } = this.props;
     onStopPress(id)
   }
-  render(){
-    const { title, date, elapsed, onEditPress} = this.props
-    const elapsedString = millisecondsToHuman(elapsed);
-    return(
-      <View style={styles.timerContainer}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.date}>{date}</Text>
-        <Text style={styles.elapsedTime}>{elapsedString}</Text>
+  renderTimerEdit = () => {
+    const { onEditPress, editingTimer } = this.props
+    if (!editForm) {
+      return(
         <View style={styles.buttonGroup}>
           <TimerButton color="crimson" small title="Edit" onPress={onEditPress}/>
           <TimerButton color="crimson" small title="Remove" onPress={this.handleRemovePress}/>
         </View>
+      )
+    }
+    else {
+      return(
+        <View style={styles.buttonGroup}>
+          <TimerButton color="#f9bfca" small title="Edit" onPress={null} opacity={1} />
+          <TimerButton color="crimson" small title="Remove" onPress={this.handleRemovePress}/>
+        </View>
+      )
+    }
+  }
+  render(){
+    const { title, date, elapsed, aylus} = this.props
+    const elapsedString = millisecondsToHuman(elapsed);
+
+    return(
+      <View style={styles.timerContainer}>
+        <Text style={styles.title}>{title}</Text>
+        <View style={styles.infoContainer}>
+          <Text style={styles.date}>{date}</Text>
+          <Text style={styles.date}>|</Text>
+          <Text style={styles.date}>{aylus ? "AYLUS Event":"Not AYLUS Event"}</Text>
+        </View>
+        <Text style={styles.elapsedTime}>{elapsedString}</Text>
+        {this.renderTimerEdit()}
         <ConfirmDialog
           title="Delete Event"
           message="Are you sure you want to delete this event? This will remove all data on this event."
@@ -89,7 +111,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   date: {
-    fontSize: 20,
+    fontSize: 22,
     color: 'black',
   },
   elapsedTime: {
@@ -100,6 +122,10 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   buttonGroup: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  infoContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
