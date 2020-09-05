@@ -6,16 +6,16 @@ import TimePickerModal from './TimePickerModal';
 import getFormattedDate from '../utils/getFormattedDate'
 import SwitchSelector from "react-native-switch-selector";
 import TimePicker from 'react-native-simple-time-picker';
-import '../utils/global'
 
 export default class TimerForm extends React.Component {
    constructor(props) {
      super(props);
-     const { id, title, date, aylus } = props;
+     const { id, title, date, aylus, elapsed } = props;
      this.state = {
        title: id ? title : '',
        date: id ? date : '',
        aylus: id ? aylus : true,
+       elapsed: id ? elapsed : 0,
        show: false,
        mode: 'date',
        displayFormat: 'DD/MM/YYYY',
@@ -43,18 +43,22 @@ export default class TimerForm extends React.Component {
    handleTitleChange = title => {
      this.setState({ title });
    }
-   /*handleDateChange = date => {
-     this.setState({ date });
-   }*/
+
+   setElapsed(getElapsed){
+    this.setState({
+      elapsed: getElapsed
+    })
+  }
 
    handleSubmit = () => {
      const { onFormSubmit , id } = this.props;
-     const { title, date, aylus } = this.state;
+     const { title, date, aylus, elapsed } = this.state;
      onFormSubmit({
        id,
        title,
        date,
        aylus,
+       elapsed,
      });
    }
    renderDatePicker() {
@@ -71,7 +75,7 @@ export default class TimerForm extends React.Component {
    }
 
   render(){
-    let { id, onFormClose} = this.props;
+    let { id, onFormClose, elapsed} = this.props;
     const { title, aylus } = this.state;
     const submitText = id ? 'Update' : 'Create';
     const {show, mode } = this.state;
@@ -100,7 +104,7 @@ export default class TimerForm extends React.Component {
             onConfirm={this.handleDatePicked}
             onCancel={this.hideDateTimePicker}
           />
-          <TimePickerModal/>
+          <TimePickerModal elapsed={elapsed} getElapsed={elapsedTime => this.setElapsed(elapsedTime)}/>
         <View style={{borderWidth:2, borderColor:'black', borderRadius:3, height:44, marginTop:10}}>
           <SwitchSelector
             initial={aylus ? 0:1}

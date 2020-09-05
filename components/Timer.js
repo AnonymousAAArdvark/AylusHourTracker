@@ -3,7 +3,6 @@ import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import { ConfirmDialog } from 'react-native-simple-dialogs';
 import { millisecondsToHuman } from '../utils/TimerUtils';
 import TimerButton from './TimerButton';
-import '../utils/global'
 
 export default class Timer extends React.Component {
   state = {
@@ -36,22 +35,12 @@ export default class Timer extends React.Component {
   }
   renderTimerEdit = () => {
     const { onEditPress, editingTimer } = this.props
-    if (!editForm) {
-      return(
-        <View style={styles.buttonGroup}>
-          <TimerButton color="crimson" small title="Edit" onPress={onEditPress}/>
-          <TimerButton color="crimson" small title="Remove" onPress={this.handleRemovePress}/>
-        </View>
-      )
-    }
-    else {
-      return(
-        <View style={styles.buttonGroup}>
-          <TimerButton color="#f9bfca" small title="Edit" onPress={null} opacity={1} />
-          <TimerButton color="crimson" small title="Remove" onPress={this.handleRemovePress}/>
-        </View>
-      )
-    }
+    return(
+      <View style={styles.buttonGroup}>
+        <TimerButton color="crimson" small title="Edit" onPress={onEditPress}/>
+        <TimerButton color="crimson" small title="Remove" onPress={this.handleRemovePress}/>
+      </View>
+    )
   }
   render(){
     const { title, date, elapsed, aylus} = this.props

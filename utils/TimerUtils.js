@@ -1,6 +1,5 @@
 import uuidv4 from 'uuid/v4';
 import moment from 'moment'
-import '../utils/global'
 
 export const millisecondsToHuman = ms => {
   const seconds = Math.floor((ms / 1000) % 60);
@@ -62,7 +61,7 @@ export const newEventTimer = (attrs = {}) => {
     title: attrs.title || 'Timer',
     date: attrs.date || moment().format('L'),
     id: uuidv4(),
-    elapsed: humanToMiliseconds(selectHours, selectMinutes, 0),
+    elapsed: attrs.elapsed || 0,
     isRunning: false,
     aylus: attrs.aylus,
   };

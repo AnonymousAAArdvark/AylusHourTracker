@@ -7,8 +7,6 @@ import { newEventTimer } from '../utils/TimerUtils';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import TimerButton from '../components/TimerButton';
 import humanToMiliseconds from '../utils/TimerUtils';
-
-import '../utils/global'
 import { ConfirmDialog } from 'react-native-simple-dialogs';
 
 
@@ -141,13 +139,13 @@ export default class App extends React.Component {
     this.setState({
       timers: timers.map(timer => {
         if (timer.id === attrs.id) {
-          const { title, date, elapsed, aylus } = attrs;
+          const { title, date, elapsed, aylus, } = attrs;
           return {
             ...timer,
             title,
             date,
             aylus,
-            elapsed: humanToMiliseconds(selectHours, selectMinutes, 0),
+            elapsed,
           }
         } else {
           return timer
@@ -189,7 +187,7 @@ export default class App extends React.Component {
   renderEditableTimers(){ 
     if (this.state.compactMode){
       return(
-        this.state.timers.map(({ title, date, aylus, id, elapsed, isRunning}) => (
+        this.state.timers.map(({ title, date, aylus, id, elapsed, isRunning }) => (
           <CompactEditableTimer
             key={ id }
             id={id}

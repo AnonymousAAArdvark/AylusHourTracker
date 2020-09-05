@@ -12,6 +12,7 @@ export default class MainTimer extends React.Component {
   }
   openConfirm = (show) => {
     this.setState({ showConfirm: show });
+    console.log(this.state.showConfirm)
   }
   handleRemovePress = () => {
     this.openConfirm(true)
@@ -54,7 +55,7 @@ export default class MainTimer extends React.Component {
      if (isRunning){
        return(
         <View style={styles.container}>
-          <Pulse color='#21BA45' numPulses={2} diameter={200} initialDiameter={135} speed={20} duration={1800} />
+          <Pulse color='#21BA45' numPulses={2} diameter={200} speed={20} duration={1800} />
           <TouchableHighlight style={styles.pauseButton} alignContent='center' underlayColor='#2ed956' onPress={this.handleStopPress}>
             <FontAwesome style={styles.pauseIcon} name="pause" size={95} color='white' />
           </TouchableHighlight> 
