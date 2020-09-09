@@ -39,6 +39,39 @@ const pad = (numberString, size) => {
   return padded;
 };
 
+export const sortTimers = ( timers ) => {
+  let sorted = [];
+  let i = 0;
+  for (; i < timers.length; i++){
+    const timer = Object(timers[i])
+    const month = timer.date.slice(0, 2)
+    const year = timer.date.slice(6, 10)
+    const date = year + month
+    const dateExists = sorted.findIndex(x => x.date === date);
+    if (dateExists != -1) {
+      sorted[dateExists].timers.push(timer)
+    }
+    else {
+      const pushDate = {
+        date: date,
+        timers: [timer],
+        id: date,
+      }
+      sorted.push(pushDate)
+    }
+  }
+  sorted = sorted.sort((a, b) => parseInt(b.date) - parseInt(a.date));
+  return sorted;
+};
+
+export const processDate = ( date ) => {
+  const month = parseInt(date.slice(4, 7))
+  const year = parseInt(date.slice(0, 4))
+  const monthNames = ["placeholder", "January", "February", "March", "April", "May","June","July", "August", "September", "October", "November","December"];
+  const processedDate = monthNames[month] + ' (' + month + '), ' + year
+  return processedDate;
+};
+
 export default function humanToMiliseconds(hrs,min,sec) {
   return((hrs*60*60+min*60+sec)*1000);
 };
@@ -65,6 +98,5 @@ export const newEventTimer = (attrs = {}) => {
     isRunning: false,
     aylus: attrs.aylus,
   };
-
   return eventTimer;
 };

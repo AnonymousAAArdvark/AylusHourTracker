@@ -1,14 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView, Text, TouchableHighlight, AsyncStorage } from 'react-native';
 import EditableTimer from '../components/EditableTimer';
-import CompactEditableTimer from '../components/CompactEditableTimer';
 import ToggleableTimerForm from '../components/ToggleableTimerForm';
-import { newEventTimer } from '../utils/TimerUtils';
+import { newEventTimer, sortTimers } from '../utils/TimerUtils';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import TimerButton from '../components/TimerButton';
 import humanToMiliseconds from '../utils/TimerUtils';
 import { ConfirmDialog } from 'react-native-simple-dialogs';
-
+import DateSection from '../components/DateSection';
 
 const saveTimers = async (timersArray) => {
   try {
@@ -152,7 +151,6 @@ export default class App extends React.Component {
         }
       })
     })
-    //this.handleUpdate()
   }
 
   handleRemovePress = timerId => {
@@ -160,7 +158,6 @@ export default class App extends React.Component {
     this.setState({
       timers: this.state.timers.filter(t => t.id !== timerId)
     })
-    //this.handleUpdate()
   }
   handleUpdate = () => {
     const { timers } = this.state;
@@ -183,43 +180,56 @@ export default class App extends React.Component {
       compactMode: true
     })
   }
-
+  setTimers(getTimer){
+    this.setState({
+      timers: getTimer
+    })
+  }
   renderEditableTimers(){ 
-    if (this.state.compactMode){
+    const { timers } = this.state
+    const sortedTimers = sortTimers(timers)
+    if (timers.length != 0) {
       return(
-        this.state.timers.map(({ title, date, aylus, id, elapsed, isRunning }) => (
-          <CompactEditableTimer
-            key={ id }
-            id={id}
-            title={title}
+        sortedTimers.map(({ date, timers, id }) => (
+          <DateSection
             date={date}
-            aylus={aylus}
-            elapsed={elapsed}
-            isRunning={isRunning}
-            onFormSubmit={this.handleFormSubmit}
-            onRemovePress={this.handleRemovePress}
+            timers={timers}
+            fullTimers={this.state.timers}
+            key={id}
+            isCompact={this.state.compactMode}
+            getTimers={ getTimer => this.setTimers(getTimer)} 
           />
+          
         ))
       );
     }
-    else{
+    else {
       return(
-        this.state.timers.map(({ title, date, aylus, id, elapsed, isRunning}) => (
-          <EditableTimer
-            key={ id }
-            id={id}
-            title={title}
-            date={date}
-            aylus={aylus}
-            elapsed={elapsed}
-            isRunning={isRunning}
-            onFormSubmit={this.handleFormSubmit}
-            onRemovePress={this.handleRemovePress}
-          />
-        ))
-      );
+        <View style={styles.placeholder}>
+          <Text style={styles.placeholderText}>Saved events will appear here.</Text>
+        </View>
+      )
     }
   }
+  // renderEditableTimers(){ 
+  //   return(
+  //     this.state.timers.map(({ title, date, aylus, id, elapsed, isRunning}) => (
+  //       <EditableTimer
+  //         key={ id }
+  //         id={id}
+  //         title={title}
+  //         date={date}
+  //         aylus={aylus}
+  //         elapsed={elapsed}
+  //         isRunning={isRunning}
+  //         onFormSubmit={this.handleFormSubmit}
+  //         onRemovePress={this.handleRemovePress}
+  //         isCompact={this.state.compactMode}
+  //       />
+        
+  //     ))
+  //   );
+  // }
   renderLayoutButton() {
     if (this.state.compactMode){
       return(
@@ -243,7 +253,6 @@ export default class App extends React.Component {
           <ToggleableTimerForm isOpen={false} onFormSubmit={this.handleCreateSubmit}/>
           { this.renderEditableTimers() }
           <View style={styles.buttonPadding}>
-
             <TimerButton title="Remove all Events" color="crimson" onPress={this.handleClearPress}/>
           </View>
         </ScrollView>
@@ -270,10 +279,9 @@ export default class App extends React.Component {
     )
   }
 }
-
 const styles = StyleSheet.create({
   buttonPadding: {
-    paddingTop: 10,
+    paddingTop: 5,
     paddingHorizontal: 15,
     paddingBottom: 100,
   },
@@ -306,5 +314,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
     marginTop: 55,
+  },
+  placeholder: {
+    flex: 1,
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    marginTop: 15,
+    marginBottom: 10,
+  },
+  placeholderText: {
+    color: '#595959',
+    fontSize: 20,
+    fontWeight: '700'
   },
 });

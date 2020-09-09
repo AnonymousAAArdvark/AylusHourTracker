@@ -34,7 +34,7 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="Rewards"
+        name="Awards"
         component={TabThreeNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="md-medal" color={color} />,
@@ -86,7 +86,7 @@ function TabThreeNavigator() {
       <TabTwoStack.Screen
         name="TabThreeScreen"
         component={TabThreeScreen}
-        options={{ headerTitle: 'PVSA Rewards' }}
+        options={{ headerTitle: 'PVSA Awards' }}
       />
     </TabTwoStack.Navigator>
   );
