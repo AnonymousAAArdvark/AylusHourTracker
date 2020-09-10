@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, TouchableOpacity, View, Button, TextInput, AsyncStorage} from "react-native";
+import { Alert, StyleSheet, Text, TouchableOpacity, View, Platform, TextInput, AsyncStorage} from "react-native";
 import TimerButton from '../components/TimerButton';
 import Modal from 'react-native-modal';
+import exportXlsx from '../components/ExportXlsx';
+import filenamify from 'filenamify'
+import slugify from '@sindresorhus/slugify'
 
 export default class ExportModal extends React.Component {
     state = {
@@ -26,14 +29,19 @@ export default class ExportModal extends React.Component {
     handleBranchChange = branch => {
         this.setState({ branch });
     }
-    handleFileNameChange = name => {
-        this.setState({ name });
+    handleFileNameChange = fileName => {
+        this.setState({ fileName });
+    }
+    async share(data) {
+        const {name, branch, fileName} = this.state
+        exportXlsx(data, fileName === '' ? 'volunteer_service_form':(filenamify(slugify(fileName))), name, branch)
     }
     render() {
+        const {data} = this.props
         return(
             <View>
                 <View style={styles.buttonPadding}>
-                    <TimerButton title="Export as Exel File" color="#00ab57" onPress={this.modalOpen}/>
+                    <TimerButton title="Export as Excel File" color="#00ab57" onPress={this.modalOpen}/>
                 </View>
                 <View style={styles.centeredView}>
                     <Modal
@@ -42,14 +50,13 @@ export default class ExportModal extends React.Component {
                         hasBackdrop={true}
                         onBackdropPress={this.modalClose}
                         animationOutTiming={500}
-                        avoidKeyboard={true}
                         onRequestClose={() => {
                             Alert.alert("Modal has been closed.");
                         }}
                         >
                         <View style={styles.modalView}>
                             <View style={styles.headerView}>
-                                <Text style={{...styles.textStyle, color:'black', fontWeight:'normal', fontSize:20,}}>Export Events into Exel</Text>
+                                <Text style={{...styles.textStyle, color:'black', fontWeight:'normal', fontSize:20,}}>Export Events into Excel</Text>
                             </View>
                             <View style={styles.textInputStyle}>
                                 <Text style={styles.textStyle}>Enter your name:</Text>
@@ -59,7 +66,7 @@ export default class ExportModal extends React.Component {
                                 style={styles.textInput}
                                 defaultValue={''}
                                 onChangeText={this.handleNameChange}
-                                maxLength={10}  //setting limit of input
+                                maxLength={20}  //setting limit of input
                             />
                             </View>
                             <View style={styles.textInputStyle}>
@@ -70,7 +77,7 @@ export default class ExportModal extends React.Component {
                                 style={styles.textInput}
                                 defaultValue={''}
                                 onChangeText={this.handleBranchChange}
-                                maxLength={10}  //setting limit of input
+                                maxLength={20}  //setting limit of input
                             />
                             </View>
                             <View style={styles.textInputStyle}>
@@ -81,12 +88,20 @@ export default class ExportModal extends React.Component {
                                 style={styles.textInput}
                                 defaultValue={''}
                                 onChangeText={this.handleFileNameChange}
-                                maxLength={10}  //setting limit of input
+                                maxLength={30}  //setting limit of input
                             />
                             </View>
+                            <Text style={styles.TextComponentStyle}>
+                                <Text style={{fontWeight:'bold'}}>Warning: </Text>
+                                <Text>
+                                    exporting to Excel does not guarantee 100% accuracy. 
+                                    Please review the xlsx file and make any changes 
+                                    if necessary before submitting.
+                                </Text>
+                            </Text>
                             <TouchableOpacity
                                 style={{ ...styles.openButton, borderColor: "#00ab00", }}
-                                onPress={this.setModalNotVisible}
+                                onPress={() => this.share(data)}
                                 >
                                 <Text style={{...styles.textStyle, color:'#00ab00'}}>Export and download xlsx file</Text>
                             </TouchableOpacity>
@@ -94,7 +109,7 @@ export default class ExportModal extends React.Component {
                                 style={{ ...styles.openButton, borderColor: "crimson"}}
                                 onPress={this.modalClose}
                                 >
-                                <Text style={{...styles.textStyle, color:'crimson'}}>Cancel</Text>
+                                <Text style={{...styles.textStyle, color:'crimson'}}>Close</Text>
                             </TouchableOpacity>
                         </View>
                     </Modal>
@@ -105,6 +120,22 @@ export default class ExportModal extends React.Component {
     }
 }
 const styles = StyleSheet.create({
+    TextComponentStyle: {
+        width: '100%',
+        borderRadius: 5,
+        textAlign: 'left',
+        borderWidth: 2,
+        borderColor: 'red',
+        paddingLeft: Platform.OS === 'ios' ? 5:10,
+        paddingTop: Platform.OS === 'ios' ? 2:10,
+        paddingBottom: Platform.OS === 'ios' ? 2:10,
+        paddingRight: Platform.OS === 'ios' ? 0:4,
+        color: 'red',
+        fontSize: 15,
+        margin: 0,
+        marginTop: 5,
+        marginBottom: 5,
+    },
     buttonPadding: {
         paddingTop: 5,
         paddingHorizontal: 15,

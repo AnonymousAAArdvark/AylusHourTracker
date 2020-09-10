@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView, Text, TouchableHighlight, AsyncStorage } from 'react-native';
-import EditableTimer from '../components/EditableTimer';
+import ExportModal from '../components/ExportModal';
 import ToggleableTimerForm from '../components/ToggleableTimerForm';
 import { newEventTimer, sortTimers } from '../utils/TimerUtils';
 import { MaterialIcons } from '@expo/vector-icons'; 
@@ -133,25 +133,6 @@ export default class App extends React.Component {
   optionNo = () => {
     this.openConfirm(false);
   }
-  handleFormSubmit = attrs => {
-    const { timers } = this.state;
-    this.setState({
-      timers: timers.map(timer => {
-        if (timer.id === attrs.id) {
-          const { title, date, elapsed, aylus, } = attrs;
-          return {
-            ...timer,
-            title,
-            date,
-            aylus,
-            elapsed,
-          }
-        } else {
-          return timer
-        }
-      })
-    })
-  }
 
   handleRemovePress = timerId => {
     const { timers } = this.state;
@@ -165,10 +146,13 @@ export default class App extends React.Component {
   }
   handleCreateSubmit = timer => {
     const { timers } = this.state;
+    const sortData = [newEventTimer(timer), ...timers]
+    sortData.sort(function(a,b){
+        return new Date(b.date) - new Date(a.date);
+    });
     this.setState({
-      timers: [newEventTimer(timer), ...timers]
+      timers: sortData
     })
-    //this.handleUpdate()
   }
   handleLayoutSwitch = () => {
     this.setState({
@@ -211,25 +195,6 @@ export default class App extends React.Component {
       )
     }
   }
-  // renderEditableTimers(){ 
-  //   return(
-  //     this.state.timers.map(({ title, date, aylus, id, elapsed, isRunning}) => (
-  //       <EditableTimer
-  //         key={ id }
-  //         id={id}
-  //         title={title}
-  //         date={date}
-  //         aylus={aylus}
-  //         elapsed={elapsed}
-  //         isRunning={isRunning}
-  //         onFormSubmit={this.handleFormSubmit}
-  //         onRemovePress={this.handleRemovePress}
-  //         isCompact={this.state.compactMode}
-  //       />
-        
-  //     ))
-  //   );
-  // }
   renderLayoutButton() {
     if (this.state.compactMode){
       return(
@@ -252,6 +217,7 @@ export default class App extends React.Component {
         <ScrollView style={styles.timerList}>
           <ToggleableTimerForm isOpen={false} onFormSubmit={this.handleCreateSubmit}/>
           { this.renderEditableTimers() }
+          <ExportModal data={timers} />
           <View style={styles.buttonPadding}>
             <TimerButton title="Remove all Events" color="crimson" onPress={this.handleClearPress}/>
           </View>

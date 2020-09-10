@@ -208,21 +208,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-},
+  },
   TextComponentStyle: {
     width: '95%',
     borderRadius: 3,
     textAlign: 'left',
     alignSelf: 'center',
-    // Set border width.
     borderWidth: 5,
     paddingLeft: Platform.OS === 'ios' ? 5:10,
     paddingTop: Platform.OS === 'ios' ? 0:5,
     paddingRight: Platform.OS === 'ios' ? 0:4,
-
-    // Set border Hex Color Code Here.
-
-    // Adding padding on Text component.
     padding : 2,
     color: 'black',
     fontSize: 23,

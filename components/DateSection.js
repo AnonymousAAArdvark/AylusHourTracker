@@ -28,14 +28,22 @@ export default class DateSection extends React.Component {
     }
     handleRemovePress = timerId => {
         const {fullTimers} = this.props
+        const sortData = fullTimers
+        sortData.sort(function(a,b){
+            return new Date(b.date) - new Date(a.date);
+        });
         this.setState({
-          sectionTimers: fullTimers.filter(t => t.id !== timerId)
+          sectionTimers: sortData.filter(t => t.id !== timerId)
         })
     }
     handleFormSubmit = attrs => {
         const { fullTimers } = this.props;
+        const sortData = fullTimers
+        sortData.sort(function(a,b){
+            return new Date(b.date) - new Date(a.date);
+        });
         this.setState({
-          sectionTimers: fullTimers.map(timer => {
+          sectionTimers: sortData.map(timer => {
             if (timer.id === attrs.id) {
               const { title, date, elapsed, aylus, } = attrs;
               return {
@@ -55,6 +63,7 @@ export default class DateSection extends React.Component {
         const {isCompact, timers} = this.props
         const {isOpen} = this.state
         if (isOpen) {
+
             return(
                 timers.map(({ title, date, aylus, id, elapsed, isRunning}) => (
                     <EditableTimer
@@ -82,6 +91,7 @@ export default class DateSection extends React.Component {
     render() {
         const {date} = this.props
         const { isOpen } = this.state
+        const {fullTimers} = this.props
         return (
             <View>
                 <View style={styles.sectionContainer}>
