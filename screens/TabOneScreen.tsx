@@ -33,8 +33,7 @@ export default class App extends React.Component {
   }
   componentDidMount = async () => {
     this._isMounted = true
-    const TIME_INTERVAL = 1000
-    console.log('screen 1 component mounted')
+    const TIME_INTERVAL = 200
     try{
       const timersString = await AsyncStorage.getItem('@SavedTimer');
       const retrievedTimerOpen= await AsyncStorage.getItem('@timerOpen');
