@@ -211,7 +211,6 @@ export default class App extends React.Component {
       return(
         <View style={styles.appContainer}>
           <MainToggleableTimerForm onFormSubmit={this.handleCreateSubmit}/>
-          { this.renderEditableTimers() }
         </View>
       )
     } else{

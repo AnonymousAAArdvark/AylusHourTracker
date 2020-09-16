@@ -61,7 +61,7 @@ export default class MainTimerForm extends React.Component {
     }
 
     return (
-      <View style={styles.createButton}>
+      <View style={styles.updateButton}>
         <TouchableOpacity
           style={{ backgroundColor: "transparent", padding:10, justifyContent:'center', alignItems:'center', borderRadius:3, borderColor:'#21BA45', borderWidth:2}}
           onPress={this.handleSubmit}
@@ -169,15 +169,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginTop: 2,
     color: 'black',
-  },
-  createButton: {
-    marginTop: 10,
-    minWidth: 100,
-    height: 50,
-    width: '100%',
-    position: 'absolute',
-    bottom:84,
-    left:"4%",
   },
   updateButton: {
     marginTop: 10,

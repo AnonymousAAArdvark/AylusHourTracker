@@ -31,7 +31,7 @@ export default class MainToggleableTimerForm extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 10,
+    paddingBottom: 60,
   },
   buttonPadding: {
     paddingHorizontal: 15
