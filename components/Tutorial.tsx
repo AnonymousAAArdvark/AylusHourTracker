@@ -4,7 +4,7 @@ import AppIntroSlider from 'react-native-app-intro-slider';
 const data = [
   {
     title: 'Hour Tracker',
-    text: 'Track hours spent on volunteering events,\n and save them for future reference.',
+    text: 'Track hours spent on volunteering events, and save them for future reference.',
     image: Platform.OS === 'ios' ? (require('../assets/images/ione.png')):(require('../assets/images/eone.png')),
     bg: 'firebrick',
   },
@@ -36,23 +36,33 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     lineHeight: 25,
-    marginTop: '2%',
+    position: 'absolute',
+    marginBottom: -60,
+    bottom: '18%',
+
+    // marginTop: '2%',
     paddingLeft: 30,
     paddingRight: 30,
   },
   image: {
-    //width: '100%',
+    width: '100%',
     resizeMode: 'contain',
     height: '70%',
-    marginTop: '2%',
-    marginBottom: '1%',
+    position: 'absolute',
+    bottom: '21%',
+    // marginTop: '2%',
+    // marginBottom: '1%',
 
   },
   title: {
-    marginTop: '1%',
     fontSize: 35,
     color: 'white',
     textAlign: 'center',
+    position: 'absolute',
+    marginTop: -160,
+    top: '28%',
+    // marginBottom: -40,
+    // bottom: '100%',
   },
   tutorialScreen: {
     position: "absolute",

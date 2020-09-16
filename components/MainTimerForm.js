@@ -77,6 +77,7 @@ export default class MainTimerForm extends React.Component {
       <DateTimePicker
         isVisible={show}
         mode={mode}
+        display={"spinner"}
         onConfirm={this.handleDatePicked}
         onCancel={this.hideDateTimePicker}
       />

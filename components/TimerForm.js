@@ -67,6 +67,7 @@ export default class TimerForm extends React.Component {
       <DateTimePicker
         date={Platform.OS === 'ios' ? (value ? new Date(value) : new Date()):(value ? new Date() : new Date())}
         isVisible={show}
+        display={"spinner"}
         mode={mode}
         onConfirm={this.handleDatePicked}
         onCancel={this.hideDateTimePicker}
