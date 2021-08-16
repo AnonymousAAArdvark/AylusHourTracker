@@ -4,7 +4,7 @@
 <img src="https://github.com/AnonymousAAArdvark/AylusHourTracker/blob/master/assets/images/splash.png" height="200">
 ## About
 Aylus Hour Tracker is an app designed for the volunteer group [AYLUS](aylus.org), which allows you to track event duration, save events, manage events, and calculate PVSA rewards. 
-This app is mainly coded in typescript and is run in a framework called React Native. This app runs on both Android and IOS!
+This app is mainly coded in typescript and is run in a framework called React Native. Both android and IOS are supported!
 ### Screenshots
 <img src="https://github.com/AnonymousAAArdvark/AylusHourTracker/blob/master/assets/images/eone.png" height="424"><img src="https://github.com/AnonymousAAArdvark/AylusHourTracker/blob/master/assets/images/etwo.png" height="424"><img src="https://github.com/AnonymousAAArdvark/AylusHourTracker/blob/master/assets/images/ethree.png" height="424">
 
