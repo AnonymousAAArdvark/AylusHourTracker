@@ -5,7 +5,6 @@ import { millisecondsToHuman } from '../utils/TimerUtils';
 import TimerButton from './TimerButton';
 import { ConfirmDialog } from 'react-native-simple-dialogs';
 
-
 export default class MainTimer extends React.Component {
   state = {
     showConfirm: false
@@ -55,18 +54,18 @@ export default class MainTimer extends React.Component {
      if (isRunning){
        return(
         <View style={styles.container}>
-        <TouchableHighlight style={styles.pauseButton} alignContent='center' underlayColor='#00f23a' onPress={this.handleStopPress}>
-          <FontAwesome style={styles.pauseIcon} name="pause" size={95} color='white' />
-        </TouchableHighlight> 
+          <TouchableHighlight style={styles.pauseButton} alignContent='center' underlayColor='#00f23a' onPress={this.handleStopPress}>
+            <FontAwesome style={styles.pauseIcon} name="pause" size={95} color='white' />
+          </TouchableHighlight> 
         </View>
        )
      }
 
      return (
       <View style={styles.container}>
-      <TouchableHighlight style={styles.resumeButton} alignContent='center' underlayColor='#ff1212' onPress={this.handleStartPress}>
-        <FontAwesome style={styles.resumeIcon} name="play" size={100} color='white' />
-      </TouchableHighlight> 
+        <TouchableHighlight style={styles.resumeButton} alignContent='center' underlayColor='#ff1212' onPress={this.handleStartPress}>
+          <FontAwesome style={styles.resumeIcon} name="play" size={100} color='white' />
+        </TouchableHighlight> 
       </View>
      )
   }
@@ -164,6 +163,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#DB2828'
   },
   container: {
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: '25%',
+    justifyContent: 'center',
     flex: 1,
     alignItems: 'center',
     paddingHorizontal: 10,

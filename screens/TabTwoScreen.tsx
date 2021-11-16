@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Text, KeyboardAvoidingView, TouchableHighlight, AsyncStorage } from 'react-native';
+import { StyleSheet, View, ScrollView, Text, KeyboardAvoidingView, TouchableHighlight, Platform, AsyncStorage } from 'react-native';
 import EditableTimer from '../components/EditableTimer';
 import CompactEditableTimer from '../components/CompactEditableTimer';
 import ToggleableTimerForm from '../components/ToggleableTimerForm';
@@ -238,34 +238,32 @@ export default class App extends React.Component {
     const { timers } = this.state;
     return(
       <View style={styles.appContainer}>
-        <KeyboardAvoidingView behavior="padding" style={styles.timerListContainer}>
-          <ScrollView style={styles.timerList}>
-            <ToggleableTimerForm isOpen={false} onFormSubmit={this.handleCreateSubmit}/>
-            { this.renderEditableTimers() }
-            <View style={styles.buttonPadding}>
-              <TimerButton title="Remove all Events" color="crimson" onPress={this.handleClearPress}/>
-            </View>
-          </ScrollView>
-          <ConfirmDialog
-              title="Remove all Events"
-              message="Are you sure you want to remove all events? This will remove all events and their data from this device."
-              onTouchOutside={() => this.openConfirm(false)}
-              visible={this.state.showConfirm}
-              negativeButton={{
-                title: "NO",
-                onPress: this.optionNo,
-                disabled: false,
-              }}
-              positiveButton={{
-                title: "YES",
-                onPress: this.optionYes,
-                titleStyle: {
-                  color: "red",
-                },
-              }}
-            />
-          { this.renderLayoutButton() }
-        </KeyboardAvoidingView>
+        <ScrollView style={styles.timerList}>
+          <ToggleableTimerForm isOpen={false} onFormSubmit={this.handleCreateSubmit}/>
+          { this.renderEditableTimers() }
+          <View style={styles.buttonPadding}>
+            <TimerButton title="Remove all Events" color="crimson" onPress={this.handleClearPress}/>
+          </View>
+        </ScrollView>
+        <ConfirmDialog
+            title="Remove all Events"
+            message="Are you sure you want to remove all events? This will remove all events and their data from this device."
+            onTouchOutside={() => this.openConfirm(false)}
+            visible={this.state.showConfirm}
+            negativeButton={{
+              title: "NO",
+              onPress: this.optionNo,
+              disabled: false,
+            }}
+            positiveButton={{
+              title: "YES",
+              onPress: this.optionYes,
+              titleStyle: {
+                color: "red",
+              },
+            }}
+          />
+        { this.renderLayoutButton() }
       </View>
     )
   }
@@ -282,9 +280,6 @@ const styles = StyleSheet.create({
   },
   timerList: {
     paddingBottom: 100,
-  },
-  timerListContainer: {
-    flex: 1,
   },
   layoutButton: {
     borderRadius: 100,

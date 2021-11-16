@@ -210,10 +210,8 @@ export default class App extends React.Component {
     if(timerOpen == false) {
       return(
         <View style={styles.appContainer}>
-          <KeyboardAvoidingView behavior="padding" style={styles.timerListContainer}>
-            <MainToggleableTimerForm onFormSubmit={this.handleCreateSubmit}/>
-            { this.renderEditableTimers() }
-          </KeyboardAvoidingView>
+          <MainToggleableTimerForm onFormSubmit={this.handleCreateSubmit}/>
+          { this.renderEditableTimers() }
         </View>
       )
     } else{

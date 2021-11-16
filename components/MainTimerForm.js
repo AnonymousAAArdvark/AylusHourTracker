@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, Button, Platform } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Button, Platform, KeyboardAvoidingView, ScrollView } from 'react-native';
 import DateTimePicker from "react-native-modal-datetime-picker";
 import TimerButton from './TimerButton';
 import getFormattedDate from '../utils/getFormattedDate'
@@ -56,9 +56,9 @@ export default class MainTimerForm extends React.PureComponent {
     }
 
     return (
-        <View style={[styles.createButton, { borderColor: '#21BA45' }]}>
-          <Button color="#21BA45" title={id ? 'Update' : 'Create'} onPress={this.handleSubmit}/>
-        </View>
+      <View style={[styles.createButton, { borderColor: '#21BA45' }]}>
+        <Button color="#21BA45" title={id ? 'Update' : 'Create'} onPress={this.handleSubmit}/>
+      </View>
     )
  }
    renderDatePicker() {
@@ -96,7 +96,7 @@ export default class MainTimerForm extends React.PureComponent {
             <Button title="Pick Date (default is today)" color="crimson" onPress={this.showDateTimePicker} />
             {this.renderDatePicker()}
         </View>
-        {this.renderSubmitButton()}
+           {this.renderSubmitButton()}
       </View>
     )
   }
@@ -148,8 +148,8 @@ const styles = StyleSheet.create({
     
     fontWeight: 'bold',
     position: 'absolute',
-    bottom:80,
-    left:12,
+    bottom:84,
+    left:"4%",
   },
   updateButton: {
     marginTop: 10,
@@ -160,8 +160,8 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     fontWeight: 'bold',
     position: 'absolute',
-    bottom:30,
-    left:12,
+    bottom:31,
+    left:"4%",
   },
   button: {
     marginTop: 2,
@@ -169,5 +169,8 @@ const styles = StyleSheet.create({
     height: Platform.OS === 'ios' ? 50:40,
     borderWidth: 2,
     borderRadius: 3,
+  },
+  keyboard: {
+    flex:1
   },
 })
