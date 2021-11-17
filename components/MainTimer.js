@@ -131,11 +131,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   date: {
+    color: 'black',
     fontSize: 25,
     marginBottom: 20,
   },
   elapsedTime: {
     fontSize: 70,
+    color: 'black',
     fontWeight: 'bold',
     textAlign: 'center',
     paddingVertical: '5%',

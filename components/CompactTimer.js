@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     fontWeight: 'bold',
+    color: 'black',
   },
   infoContainer: {
     flexDirection: 'row',
@@ -98,8 +99,10 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 25,
+    color: 'black',
   },
   elapsedTime: {
+    color: 'black',
     fontSize: 25,
     textAlign: 'center',
   },

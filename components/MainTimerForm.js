@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   textInput: {
+    color: 'black',
     height: 45,
     padding: 5,
     fontSize: 25,
@@ -136,6 +137,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
     marginTop: 2,
+    color: 'black',
   },
   createButton: {
     marginTop: 10,
