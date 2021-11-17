@@ -3,7 +3,6 @@ import { StyleSheet, Image, View, ScrollView, Text, KeyboardAvoidingView, AsyncS
 import uuidv4 from 'uuid/v4';
 import moment from 'moment'
 import {millisecondsToHours} from '../utils/TimerUtils';
-import BoxText from '../components/BoxText';
 import { Ionicons, FontAwesome5} from '@expo/vector-icons';
 import background from '../assets/images/back.png'
 
