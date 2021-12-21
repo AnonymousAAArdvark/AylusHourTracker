@@ -4,12 +4,11 @@ import DateTimePicker from "react-native-modal-datetime-picker";
 import TimerButton from './TimerButton';
 import getFormattedDate from '../utils/getFormattedDate'
 import TimePicker from 'react-native-simple-time-picker';
-import humanToMiliseconds, { millisecondsToHuman } from '../utils/TimerUtils'
 import '../utils/global'
 export default class TimerForm extends React.Component {
    constructor(props) {
      super(props);
-     const { id, title, date, selectedHours} = props;
+     const { id, title, date} = props;
      this.state = {
        title: id ? title : '',
        date: id ? date : '',
