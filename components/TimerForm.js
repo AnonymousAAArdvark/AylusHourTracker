@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 import DateTimePicker from "react-native-modal-datetime-picker";
 import TimerButton from './TimerButton';
+import TimePickerModal from './TimePickerModal';
 import getFormattedDate from '../utils/getFormattedDate'
 import TimePicker from 'react-native-simple-time-picker';
 import '../utils/global'
+
 export default class TimerForm extends React.Component {
    constructor(props) {
      super(props);
@@ -117,10 +119,7 @@ export default class TimerForm extends React.Component {
               onCancel={this.hideDateTimePicker}
             />
           </View>
-        <View style={[styles.button, { borderColor: 'black' }]}>
-          <Button title="Pick Time Duration" color="black" onPress={this.showDurationPicker} />
-        </View>
-        {this.renderDurationPicker()}
+          <TimePickerModal/>
         <View style={styles.buttonGroup}>
           <TimerButton small color="#21BA45" title={submitText} onPress={this.handleSubmit}/>
           <TimerButton small color="#DB2828" title="Cancel" onPress={onFormClose}/>

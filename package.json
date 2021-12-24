@@ -10,6 +10,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo/react-native-action-sheet": "^3.8.0",
     "@expo/vector-icons": "^10.2.0",
     "@react-native-community/datetimepicker": "^2.6.1",
     "@react-native-community/masked-view": "0.1.10",

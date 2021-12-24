@@ -210,7 +210,7 @@ export default class AwardModal extends React.Component {
   renderEdit = () => {
     if(this.state.customDisabled == false){
         return(
-            <TouchableHighlight underlayColor="#f16883" style={{ ...styles.openButton, backgroundColor: "crimson", marginLeft:10,}} onPress={() => { this.setModalVisible(true);}}>
+            <TouchableHighlight underlayColor="#f16883" style={{ ...styles.openButton, backgroundColor: "crimson", marginLeft:10, borderRadius:5,}} onPress={() => { this.setModalVisible(true);}}>
                 <Text style={styles.textStyle}>Edit</Text>
             </TouchableHighlight>
         )
