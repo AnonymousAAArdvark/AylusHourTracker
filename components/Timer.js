@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import { ConfirmDialog } from 'react-native-simple-dialogs';
 import { millisecondsToHuman } from '../utils/TimerUtils';
 import TimerButton from './TimerButton';

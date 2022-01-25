@@ -242,6 +242,7 @@ export default class App extends React.Component {
           <ToggleableTimerForm isOpen={false} onFormSubmit={this.handleCreateSubmit}/>
           { this.renderEditableTimers() }
           <View style={styles.buttonPadding}>
+
             <TimerButton title="Remove all Events" color="crimson" onPress={this.handleClearPress}/>
           </View>
         </ScrollView>
