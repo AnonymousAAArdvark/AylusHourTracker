@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Alert, StyleSheet, Text, TouchableHighlight, View, Button, TextInput, AsyncStorage} from "react-native";
+import { Alert, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View, Button, TextInput, AsyncStorage} from "react-native";
 import Modal from 'react-native-modal';
 import ProfileSelector from './ProfileSelector'
 
@@ -31,15 +31,6 @@ export default class AwardModal extends React.Component {
     prevProfile: -12,
 };
   async componentDidMount() {
-    if (this.props.getGoldHours) {
-        this.props.getGoldHours(this.goldHours(this.state.awardGold));
-    }
-    if (this.props.getSilverHours) {
-        this.props.getSilverHours(this.bronzeHours(this.state.awardSilver));
-    }
-    if (this.props.getBronzeHours) {
-        this.props.getBronzeHours(this.silverHours(this.state.awardBronze));
-    }
     try {
       const goldString = await AsyncStorage.getItem('@savedGold');
       const bronzeString = await AsyncStorage.getItem('@savedBronze');
@@ -69,6 +60,15 @@ export default class AwardModal extends React.Component {
       console.error(error)
     }
 
+    if (this.props.getGoldHours) {
+        this.props.getGoldHours(this.goldHours(this.state.awardGold));
+    }
+    if (this.props.getSilverHours) {
+        this.props.getSilverHours(this.bronzeHours(this.state.awardSilver));
+    }
+    if (this.props.getBronzeHours) {
+        this.props.getBronzeHours(this.silverHours(this.state.awardBronze));
+    }
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevState !== this.state) {
@@ -210,9 +210,12 @@ export default class AwardModal extends React.Component {
   renderEdit = () => {
     if(this.state.customDisabled == false){
         return(
-            <TouchableHighlight underlayColor="#f16883" style={{ ...styles.openButton, backgroundColor: "crimson", marginLeft:10, borderRadius:5,}} onPress={() => { this.setModalVisible(true);}}>
-                <Text style={styles.textStyle}>Edit</Text>
-            </TouchableHighlight>
+            <TouchableOpacity
+              style={{ borderRadius:5, borderColor: "crimson", padding:10, borderWidth:5, marginLeft:10}}
+              onPress={() => { this.setModalVisible(true);}}
+              >
+              <Text style={{color: "crimson", fontSize: 18, fontWeight:'800', textAlign: "center"}}>Edit</Text>
+            </TouchableOpacity>
         )
     }
     else{

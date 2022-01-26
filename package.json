@@ -39,6 +39,7 @@
     "react-native-modal-datetime-picker": "^8.7.1",
     "react-native-modal-selector": "^2.0.2",
     "react-native-neu-element": "^1.1.9",
+    "react-native-pulse": "^1.0.7",
     "react-native-reanimated": "^1.9.0",
     "react-native-safe-area-context": "3.0.7",
     "react-native-screens": "~2.9.0",
