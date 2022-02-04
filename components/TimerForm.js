@@ -4,24 +4,24 @@ import DateTimePicker from "react-native-modal-datetime-picker";
 import TimerButton from './TimerButton';
 import TimePickerModal from './TimePickerModal';
 import getFormattedDate from '../utils/getFormattedDate'
+import SwitchSelector from "react-native-switch-selector";
 import TimePicker from 'react-native-simple-time-picker';
 import '../utils/global'
 
 export default class TimerForm extends React.Component {
    constructor(props) {
      super(props);
-     const { id, title, date} = props;
+     const { id, title, date, aylus } = props;
      this.state = {
        title: id ? title : '',
        date: id ? date : '',
+       aylus: id ? aylus : true,
        show: false,
        mode: 'date',
        displayFormat: 'DD/MM/YYYY',
        label: 'Date',
        value: '',
        showDuration: false,
-       selectedHours: 0,
-       selectedMinutes: 0,
      }
    }
    showDateTimePicker = () => {
@@ -43,38 +43,18 @@ export default class TimerForm extends React.Component {
    handleTitleChange = title => {
      this.setState({ title });
    }
-   renderDurationPicker() {
-    const {showDuration, selectedHours, selectedMinutes} = this.state
-    if (showDuration){
-     return(
-       <View style={styles.container}>
-         <View style={styles.textGroup}>
-          <Text style={styles.textDuration}>Hours</Text>
-          <Text style={styles.textDuration}>:</Text>
-          <Text style={styles.textDuration}>Minutes</Text>
-        </View>
-         <TimePicker
-           selectedHours={selectedHours}
-           selectedMinutes={selectedMinutes}
-           onChange={(hours, minutes) => this.setState({ selectedHours: hours, selectedMinutes: minutes })}
-           />
-     </View>
-     )
-     
-    }
-  }
    /*handleDateChange = date => {
      this.setState({ date });
    }*/
 
    handleSubmit = () => {
      const { onFormSubmit , id } = this.props;
-     const { title, date, elapsed, selectedHours} = this.state;
+     const { title, date, aylus } = this.state;
      onFormSubmit({
        id,
        title,
        date,
-       selectedHours,
+       aylus,
      });
    }
    renderDatePicker() {
@@ -92,11 +72,9 @@ export default class TimerForm extends React.Component {
 
   render(){
     let { id, onFormClose} = this.props;
-    const { title} = this.state;
+    const { title, aylus } = this.state;
     const submitText = id ? 'Update' : 'Create';
-    const {show, mode, value, selectedHours, selectedMinutes} = this.state;
-    selectHours = selectedHours
-    selectMinutes = selectedMinutes
+    const {show, mode } = this.state;
     return(
       <View style={styles.formContainer}>
         <View style={styles.attributeContainer}>
@@ -123,6 +101,26 @@ export default class TimerForm extends React.Component {
             onCancel={this.hideDateTimePicker}
           />
           <TimePickerModal/>
+        <View style={{borderWidth:2, borderColor:'black', borderRadius:3, height:44, marginTop:10}}>
+          <SwitchSelector
+            initial={aylus ? 0:1}
+            onPress={value => this.setState({ aylus: value })}
+            textColor={"black"} //'#7a44cf'
+            selectedColor={"white"}
+            buttonColor={"black"}
+            borderColor={"black"}
+            fontSize={17}
+            style={{marginTop:0}}
+            borderRadius={3}
+            borderWidth={0}
+            height={40}
+            hasPadding
+            options={[
+              { label: "AYLUS", value: true }, //images.feminino = require('./path_to/assets/img/feminino.png')
+              { label: "Not AYLUS", value: false } //images.masculino = require('./path_to/assets/img/masculino.png')
+            ]}
+          />
+        </View>
         <View style={styles.buttonGroup}>
           <TimerButton small color="#21BA45" title={submitText} onPress={this.handleSubmit}/>
           <TimerButton small color="#DB2828" title="Cancel" onPress={onFormClose}/>

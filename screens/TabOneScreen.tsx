@@ -113,11 +113,12 @@ export default class App extends React.Component {
     this.setState({
       timers: timers.map(timer => {
         if (timer.id === attrs.id) {
-          const { title, date } = attrs;
+          const { title, date, aylus } = attrs;
 
           return {
             ...timer,
             title,
+            aylus,
             date,
           }
         } else {
@@ -160,7 +161,6 @@ export default class App extends React.Component {
 
   handleCreateSubmit = timer => {
     const { timers } = this.state;
-
     this.setState({
       timers: [newTimer(timer)]
     })
@@ -187,12 +187,13 @@ export default class App extends React.Component {
   }
 
   renderEditableTimers = () => (
-    this.state.timers.map(({ title, date, id, elapsed, isRunning}) => (
+    this.state.timers.map(({ title, date, aylus, id, elapsed, isRunning}) => (
       <MainEditableTimer
         key={ id }
         id={id}
         title={title}
         date={date}
+        aylus={aylus}
         elapsed={elapsed}
         isRunning={isRunning}
         onFormSubmit={this.handleFormSubmit}

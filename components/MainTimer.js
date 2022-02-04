@@ -12,7 +12,6 @@ export default class MainTimer extends React.Component {
   }
   openConfirm = (show) => {
     this.setState({ showConfirm: show });
-    console.log(this.state.showConfirm)
   }
   handleRemovePress = () => {
     this.openConfirm(true)
@@ -73,12 +72,13 @@ export default class MainTimer extends React.Component {
   }
   render(){
     const { isRunning } = this.props;
-    const { title, date, elapsed, onEditPress } = this.props
+    const { title, date, aylus, elapsed, onEditPress } = this.props
     const elapsedString = millisecondsToHuman(elapsed);
     return(
       <View style={styles.timerContainer}>
         <Text style={styles.title}>{title}</Text>
-        <Text style={styles.date}>{date}</Text>
+        <Text style={{...styles.date, marginBottom:0}}>{date}</Text>
+        <Text style={styles.event}>{aylus ? "AYLUS Event":"Not AYLUS Event"}</Text>
         <Text style={styles.elapsedTime}>{elapsedString}</Text>
         { this.renderActionButton()}
         <View style={styles.buttonGroup}>
@@ -135,7 +135,12 @@ const styles = StyleSheet.create({
   date: {
     color: 'black',
     fontSize: 25,
-    marginBottom: 20,
+    marginBottom: 3,
+  },
+  event: {
+    color: 'black',
+    fontSize: 20,
+    marginBottom: 0,
   },
   elapsedTime: {
     fontSize: 70,

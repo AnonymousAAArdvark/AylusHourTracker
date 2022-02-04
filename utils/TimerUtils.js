@@ -24,6 +24,14 @@ export const millisecondsToHours = ms => {
   return humanized;
 };
 
+export const millisecondsToMinutes = ms => {
+  const minutes = Math.floor((ms / 1000 / 60) % 60);
+
+  const humanized = minutes.toString()
+
+  return humanized;
+};
+
 const pad = (numberString, size) => {
   let padded = numberString;
   while (padded.length < size) {
@@ -44,6 +52,7 @@ export const newTimer = (attrs = {}) => {
     id: uuidv4(),
     elapsed: 0,
     isRunning: false,
+    aylus: attrs.aylus,
   };
 
   return timer;
@@ -55,6 +64,7 @@ export const newEventTimer = (attrs = {}) => {
     id: uuidv4(),
     elapsed: humanToMiliseconds(selectHours, selectMinutes, 0),
     isRunning: false,
+    aylus: attrs.aylus,
   };
 
   return eventTimer;

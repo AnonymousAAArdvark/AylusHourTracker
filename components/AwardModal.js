@@ -151,11 +151,13 @@ export default class AwardModal extends React.Component {
             newText = newText + text[i];
         }
         else {
-            // your call back function
             alert("please enter numbers only");
+            console.log(newText)
         }
     }
-    this.setState({ [medal]: newText });
+    this.setState({ 
+      [medal]: newText,
+    });
   }
   profilePicker = () => {
     const {profileOption, prevOption} = this.state
@@ -248,7 +250,7 @@ export default class AwardModal extends React.Component {
                     <TextInput 
                         style={styles.textInput}
                         defaultValue={this.state.awardBronze + ''}
-                        keyboardType='numeric'
+                        keyboardType='number-pad'
                         onChangeText={(text)=> this.onChanged(text, 'valueBronze')}
                         maxLength={10}  //setting limit of input
                     />
@@ -258,7 +260,7 @@ export default class AwardModal extends React.Component {
                     <TextInput 
                         style={styles.textInput}
                         defaultValue={this.state.awardSilver + ''}
-                        keyboardType='numeric'
+                        keyboardType='number-pad'
                         onChangeText={(text)=> this.onChanged(text, 'valueSilver')}
                         maxLength={10}  //setting limit of input
                     />
@@ -268,7 +270,7 @@ export default class AwardModal extends React.Component {
                     <TextInput 
                         style={styles.textInput}
                         defaultValue={this.state.awardGold + ''}
-                        keyboardType='numeric'
+                        keyboardType='number-pad'
                         onChangeText={(text)=> this.onChanged(text, 'valueGold')}
                         maxLength={10}  //setting limit of input
                     />

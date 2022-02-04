@@ -1,8 +1,6 @@
 import React from 'react';
-
 import MainTimerForm from './MainTimerForm';
 import MainTimer from './MainTimer';
-
 
 export default class MainEditableTimer extends React.Component{
   state = {
@@ -19,7 +17,6 @@ export default class MainEditableTimer extends React.Component{
 
   handleSubmit = timer => {
     const { onFormSubmit } = this.props;
-
     onFormSubmit(timer);
     this.closeForm();
   }
@@ -33,17 +30,17 @@ export default class MainEditableTimer extends React.Component{
   }
 
   render(){
-    const { id, title, date, elapsed, isRunning, onRemovePress, onStartPress, onStopPress, onSavePress } = this.props;
+    const { id, title, date, aylus, elapsed, isRunning, onRemovePress, onStartPress, onStopPress, onSavePress } = this.props;
     const { editFormOpen } = this.state;
-
     if (editFormOpen){
-      return <MainTimerForm id={id} title={title} date={date} onFormSubmit={this.handleSubmit} onFormClose={this.handleFormClose}/>;
+      return <MainTimerForm id={id} title={title} date={date} aylus={aylus} updateInitial={true} onFormSubmit={this.handleSubmit} onFormClose={this.handleFormClose}/>;
     } else {
       return (
         <MainTimer
           id={id}
           title={title}
           date={date}
+          aylus={aylus} 
           elapsed={elapsed}
           isRunning={isRunning}
           onEditPress={this.handleEditPress}

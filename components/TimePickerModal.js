@@ -12,30 +12,31 @@ export default class TimePickerModal extends React.Component {
         showDuration: false,
         selectedHours: 0,
         selectedMinutes: 0,
+        saveDuration: 0,
+        prevHours: 0,
+        prevMinutes: 0,
     }
     showDurationPicker = () => {
         // alert('showDateTimePicker');
-        this.setState({ showDuration: true });
-    }
-    setModalVisible = (visible) => {
         this.setState({ 
-            showDuration: visible,
+            saveDuration: 0,
+            showDuration: true,
         });
-      }
-      setModalNotVisible = () => {
+    }
+    setModalNotVisible = () => {
         this.setState({ 
+            saveDuration: 1,
             showDuration: false,
-             });
-      }
-      setModalCancel = () => {
+        });
+    }
+    setModalCancel = () => {
         this.setState({ 
+            saveDuration: 0,
             showDuration: false,
-             });
-      }
+        });
+    }
     renderDurationPicker() {
         const {showDuration, selectedHours, selectedMinutes} = this.state
-        selectHours = selectedHours
-        selectMinutes = selectedMinutes
         if (showDuration){
          return(
            <View >
@@ -45,8 +46,8 @@ export default class TimePickerModal extends React.Component {
               <Text style={styles.textDuration}>Minutes</Text>
              </View>
              <TimePicker
-               selectedHours={selectedHours}
-               selectedMinutes={selectedMinutes}
+               selectedHours={parseInt(prevHours)}
+               selectedMinutes={parseInt(prevMinutes)}
                onChange={(hours, minutes) => this.setState({ selectedHours: hours, selectedMinutes: minutes })}
                />
          </View>
@@ -140,6 +141,17 @@ export default class TimePickerModal extends React.Component {
         }
     }
     render(){
+        const {saveDuration, selectedHours, selectedMinutes} = this.state
+        if(saveDuration == 1){
+            selectHours = selectedHours
+            selectMinutes = selectedMinutes
+            prevHours = selectHours
+            prevMinutes = selectMinutes
+        }
+        else if (saveDuration == 0){
+            selectHours = prevHours
+            selectMinutes = prevMinutes
+        }
         return(
             <View>
                 <TouchableOpacity

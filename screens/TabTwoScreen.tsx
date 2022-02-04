@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Text, KeyboardAvoidingView, TouchableHighlight, Platform, AsyncStorage } from 'react-native';
+import { StyleSheet, View, ScrollView, Text, TouchableHighlight, AsyncStorage } from 'react-native';
 import EditableTimer from '../components/EditableTimer';
 import CompactEditableTimer from '../components/CompactEditableTimer';
 import ToggleableTimerForm from '../components/ToggleableTimerForm';
@@ -127,11 +127,11 @@ export default class App extends React.Component {
         1000,
     );
   }
-  removeAllTimers = () => {
+  removeAllTimers = async () => {
     this.setState({
       timers: []
     })
-    AsyncStorage.removeItem('@SavedEvents')
+    await AsyncStorage.removeItem('@SavedEvents')
   }
   optionNo = () => {
     this.openConfirm(false);
@@ -141,11 +141,12 @@ export default class App extends React.Component {
     this.setState({
       timers: timers.map(timer => {
         if (timer.id === attrs.id) {
-          const { title, date, elapsed } = attrs;
+          const { title, date, elapsed, aylus } = attrs;
           return {
             ...timer,
             title,
             date,
+            aylus,
             elapsed: humanToMiliseconds(selectHours, selectMinutes, 0),
           }
         } else {
@@ -188,12 +189,13 @@ export default class App extends React.Component {
   renderEditableTimers(){ 
     if (this.state.compactMode){
       return(
-        this.state.timers.map(({ title, date, id, elapsed, isRunning}) => (
+        this.state.timers.map(({ title, date, aylus, id, elapsed, isRunning}) => (
           <CompactEditableTimer
             key={ id }
             id={id}
             title={title}
             date={date}
+            aylus={aylus}
             elapsed={elapsed}
             isRunning={isRunning}
             onFormSubmit={this.handleFormSubmit}
@@ -204,12 +206,13 @@ export default class App extends React.Component {
     }
     else{
       return(
-        this.state.timers.map(({ title, date, id, elapsed, isRunning}) => (
+        this.state.timers.map(({ title, date, aylus, id, elapsed, isRunning}) => (
           <EditableTimer
             key={ id }
             id={id}
             title={title}
             date={date}
+            aylus={aylus}
             elapsed={elapsed}
             isRunning={isRunning}
             onFormSubmit={this.handleFormSubmit}

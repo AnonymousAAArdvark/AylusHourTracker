@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import { ConfirmDialog } from 'react-native-simple-dialogs';
 import { millisecondsToHuman } from '../utils/TimerUtils';
 import TimerButton from './TimerButton';
+import '../utils/global'
 
 export default class CompactTimer extends React.Component {
   state = {
@@ -13,7 +14,6 @@ export default class CompactTimer extends React.Component {
   }
   handleRemovePress = () => {
     this.openConfirm(true)
-
   }
   optionYes = () => {
     this.openConfirm(false);
@@ -27,7 +27,6 @@ export default class CompactTimer extends React.Component {
         500,
     );
   }
-
   optionNo = () => {
     this.openConfirm(false);
   }
@@ -35,8 +34,27 @@ export default class CompactTimer extends React.Component {
     const { isCompact } = this.props;
     onStopPress(id)
   }
+  renderTimerEdit = () => {
+    const { onEditPress, editingTimer } = this.props
+    if (!editForm) {
+      return(
+        <View style={styles.buttonGroup}>
+          <TimerButton color="crimson" small title="Edit" onPress={onEditPress}/>
+          <TimerButton color="crimson" small title="Remove" onPress={this.handleRemovePress}/>
+        </View>
+      )
+    }
+    else {
+      return(
+        <View style={styles.buttonGroup}>
+          <TimerButton color="#f9bfca" small title="Edit" onPress={null} opacity={1} />
+          <TimerButton color="crimson" small title="Remove" onPress={this.handleRemovePress}/>
+        </View>
+      )
+    }
+  }
   render(){
-    const { title, date, elapsed, onEditPress} = this.props
+    const { title, date, elapsed, aylus, onEditPress} = this.props
     const elapsedString = millisecondsToHuman(elapsed);
     return(
       <View style={styles.timerContainer}>
@@ -46,10 +64,8 @@ export default class CompactTimer extends React.Component {
           <Text style={styles.elapsedTime}>|</Text>
           <Text style={styles.date}>{date}</Text>
         </View>
-        <View style={styles.buttonGroup}>
-          <TimerButton color="crimson" small title="Edit" onPress={onEditPress}/>
-          <TimerButton color="crimson" small title="Remove" onPress={this.handleRemovePress}/>
-        </View>
+        <Text style={styles.event}>{aylus ? "AYLUS Event":"Not AYLUS Event"}</Text>
+        {this.renderTimerEdit()}
         <ConfirmDialog
           title="Delete Event"
           message="Are you sure you want to delete this event? This will remove all data on this event."
@@ -99,6 +115,10 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 25,
+    color: 'black',
+  },
+  event: {
+    fontSize: 20,
     color: 'black',
   },
   elapsedTime: {
