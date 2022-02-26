@@ -10,5 +10,5 @@ This app is mainly coded in typescript and is run in a framework called React Na
 
 
 ## Hotpot
-**Easily create App store and Play store screenshots with Hotpot: [hotpot.ai](hotpot.ai)<br>**
+**Easily create App store and Play store screenshots with Hotpot: [hotpot.ai](https://hotpot.ai/)<br>**
   * Hotpot provides a great user experience and helpul AI tools. It allows you to design device mockups, social media posts, marketing images, and other graphics, all without graphic design knowldedge! I used this to design my Appstore and Play store screenshots!
