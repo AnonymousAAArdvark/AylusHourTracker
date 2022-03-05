@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Button, TouchableHighlight, TouchableOpacity, Platform } from 'react-native';
 import DateTimePicker from "react-native-modal-datetime-picker";
-import TimerButton from './TimerButton';
+import {millisecondsToHours, millisecondsToMinutes} from '../utils/TimerUtils';
+import humanToMiliseconds from '../utils/TimerUtils';
 import getFormattedDate from '../utils/getFormattedDate'
 import TimePicker from 'react-native-simple-time-picker';
-import '../utils/global'
 import Modal from 'react-native-modal';
 
 export default class TimePickerModal extends React.Component {
@@ -13,30 +13,53 @@ export default class TimePickerModal extends React.Component {
         selectedHours: 0,
         selectedMinutes: 0,
         saveDuration: 0,
-        prevHours: 0,
-        prevMinutes: 0,
+        elapsed: 0,
+        currElapsed: 0,
+        prevElapsed: 0,
     }
+    componentDidMount() {
+        const { elapsed } = this.props
+        this.setState({
+            currElapsed: elapsed,
+            prevElapsed: elapsed,
+            elapsed: elapsed,
+        })
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState !== this.state) {
+            if (this.props.getElapsed) {
+                this.props.getElapsed(this.elapsedTime(this.state.elapsed));
+            }
+        }
+    }
+    elapsedTime(elapsed) {
+        //Check for condition and return value
+        return elapsed;
+      }
     showDurationPicker = () => {
         // alert('showDateTimePicker');
         this.setState({ 
-            saveDuration: 0,
             showDuration: true,
         });
     }
     setModalNotVisible = () => {
         this.setState({ 
-            saveDuration: 1,
+            elapsed: this.state.currElapsed,
+            prevElapsed: this.state.currElapsed,
             showDuration: false,
         });
     }
     setModalCancel = () => {
         this.setState({ 
-            saveDuration: 0,
             showDuration: false,
+            elapsed: this.state.prevElapsed
         });
     }
     renderDurationPicker() {
-        const {showDuration, selectedHours, selectedMinutes} = this.state
+        const { elapsed } = this.props
+        const {showDuration, prevElapsed, currElapsed } = this.state
+        const prevMin = millisecondsToMinutes(prevElapsed)
+        const prevHor = millisecondsToHours(prevElapsed)
         if (showDuration){
          return(
            <View >
@@ -46,9 +69,9 @@ export default class TimePickerModal extends React.Component {
               <Text style={styles.textDuration}>Minutes</Text>
              </View>
              <TimePicker
-               selectedHours={parseInt(prevHours)}
-               selectedMinutes={parseInt(prevMinutes)}
-               onChange={(hours, minutes) => this.setState({ selectedHours: hours, selectedMinutes: minutes })}
+               selectedHours={parseInt(prevHor)}
+               selectedMinutes={parseInt(prevMin)}
+               onChange={(hours, minutes) => this.setState({ currElapsed: humanToMiliseconds(hours, minutes, 0) })}
                />
          </View>
          )
@@ -141,17 +164,7 @@ export default class TimePickerModal extends React.Component {
         }
     }
     render(){
-        const {saveDuration, selectedHours, selectedMinutes} = this.state
-        if(saveDuration == 1){
-            selectHours = selectedHours
-            selectMinutes = selectedMinutes
-            prevHours = selectHours
-            prevMinutes = selectMinutes
-        }
-        else if (saveDuration == 0){
-            selectHours = prevHours
-            selectMinutes = prevMinutes
-        }
+        const { selectedHours, selectedMinutes } = this.state
         return(
             <View>
                 <TouchableOpacity
