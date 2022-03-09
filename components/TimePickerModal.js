@@ -183,6 +183,7 @@ export default class TimePickerModal extends React.Component {
 const styles = StyleSheet.create({
     textStyle: {
         fontSize: 20,
+        color: 'black',
         fontWeight: "bold",
         textAlign: "center"
     },

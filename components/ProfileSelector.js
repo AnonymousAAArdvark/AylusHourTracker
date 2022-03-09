@@ -156,7 +156,6 @@ export default class ProfileSelector extends React.Component {
         </View>
     )
   }
-
 }
 const styles = StyleSheet.create({
     selectorContainer: {

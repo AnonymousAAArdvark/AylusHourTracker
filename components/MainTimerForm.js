@@ -108,7 +108,7 @@ export default class MainTimerForm extends React.Component {
           <Text style={{fontSize:20, color:'crimson'}}>Pick Date (default is today)</Text>
         </TouchableOpacity>
         <Text style={styles.textInputTitle}>Event</Text>
-        <View style={{borderWidth:2, borderColor:'dodgerblue', borderRadius:3, height:47, marginTop:-0}}>
+        <View style={{borderWidth:2, borderColor:'dodgerblue', borderRadius:3, height:47, marginTop:5}}>
           <SwitchSelector
             initial={aylus ? 0:1}
             onPress={value => this.setState({ aylus: value })}

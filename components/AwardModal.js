@@ -180,9 +180,9 @@ export default class AwardModal extends React.Component {
         }
         else if(profileOption == 3){
             this.setState({ 
-                awardGold: 500,
+                awardGold: 250,
                 awardBronze: 100,
-                awardSilver: 250,
+                awardSilver: 175,
                 customDisabled: true
 
             });
@@ -276,20 +276,18 @@ export default class AwardModal extends React.Component {
                     />
                     </View>
                     <View style={styles.buttonRow}>
-                        <TouchableHighlight
-                            underlayColor="#f16883" 
-                            style={{ ...styles.openButton, backgroundColor: "crimson", }}
+                        <TouchableOpacity
+                            style={{ ...styles.openButton, borderColor: "crimson"}}
                             onPress={this.setModalCancel}
                             >
-                            <Text style={styles.textStyle}>Cancel</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight
-                            underlayColor="#00d400" 
-                            style={{ ...styles.openButton, backgroundColor: "#00ab00", }}
+                            <Text style={{...styles.textStyle, color:'crimson'}}>Cancel</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={{ ...styles.openButton, borderColor: "#00ab00", }}
                             onPress={this.setModalNotVisible}
                             >
-                            <Text style={styles.textStyle}>Save</Text>
-                        </TouchableHighlight>
+                            <Text style={{...styles.textStyle, color:'#00ab00'}}>Save</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>
@@ -329,16 +327,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   openButton: {
-    borderRadius: 10,
+    borderRadius: 4,
     justifyContent: 'center',
     elevation: 2,
     marginLeft: 0,
     width: 100,
+    borderWidth:4,
   },
   textStyle: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 17,
+    fontWeight: '800',
     textAlign: "center"
   },
   titleContainer: {

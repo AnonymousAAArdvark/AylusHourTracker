@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, View, ScrollView, Text, TextInput, KeyboardAvoidingView, AsyncStorage, ImageBackground, Platform } from 'react-native';
+import { StyleSheet, Image, View, ScrollView, Text, Linking, KeyboardAvoidingView, AsyncStorage, ImageBackground, Platform } from 'react-native';
 import {millisecondsToHours} from '../utils/TimerUtils';
 import humanToMiliseconds from '../utils/TimerUtils';
 import { Ionicons, FontAwesome5} from '@expo/vector-icons';
@@ -134,7 +134,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { timers, totalTime } = this.state;
+    const { goldTime, silverTime, bronzeTime } = this.state;
 
     return(
       <View style={styles.appContainer}>
@@ -142,18 +142,38 @@ export default class App extends React.Component {
         <KeyboardAvoidingView behavior="padding" style={styles.timerListContainer}>
           <ScrollView style={styles.timerList}>
             <View style={styles.MainContainer}>
-                <Text style={[styles.TextComponentStyle]}>About PVSA Rewards</Text>
+                <Text style={[styles.TextComponentStyle]}>
+                  <Text style={styles.bold}>The President’s Volunteer Service Award (PVSA)</Text>
+                  <Text > is given to exeptional volunteers who positively impacts their communities. More info can be found </Text>
+                  <Text style={{...styles.underline, color: '#3333ff'}}
+                        onPress={() => Linking.openURL('https://www.presidentialserviceawards.gov/')}>
+                    in the PVSA website
+                  </Text>
+                  <Text>.</Text>
+                </Text>
                 <View style={styles.medalContainer}>
                   <FontAwesome5 name="medal" size={40} color='goldenrod' />
-                  <Text style={[styles.TextComponentStyle, styles.goldText]}>Gold Award</Text>
+                  <Text style={[styles.TextComponentStyle, styles.goldText]}>
+                    <Text>Gold Award: </Text>
+                    <Text style={styles.bold}>{millisecondsToHours(goldTime)}</Text>
+                    <Text> hours</Text>
+                  </Text>
                 </View>
                 <View style={styles.medalContainer}>
                   <FontAwesome5 name="medal" size={40} color='lightslategrey' />
-                  <Text style={[styles.TextComponentStyle, styles.silverText]}>Silver Award</Text>
+                  <Text style={[styles.TextComponentStyle, styles.silverText]}>
+                    <Text>Silver Award: </Text>
+                    <Text style={styles.bold}>{millisecondsToHours(silverTime)}</Text>
+                    <Text> hours</Text>
+                  </Text>
                 </View>
                 <View style={styles.medalContainer}>
                   <FontAwesome5 name="medal" size={40} color='#cd7f32' />
-                  <Text style={[styles.TextComponentStyle, styles.bronzeText]}>Bronze Award</Text>
+                  <Text style={[styles.TextComponentStyle, styles.bronzeText]}>
+                    <Text>Bronze Award: </Text>
+                    <Text style={styles.bold}>{millisecondsToHours(bronzeTime)}</Text>
+                    <Text> hours</Text>
+                  </Text>
                 </View>
 
                 { this.renderHoursWorked() }
@@ -205,7 +225,7 @@ const styles = StyleSheet.create({
     // Adding padding on Text component.
     padding : 2,
     color: 'black',
-    fontSize: 25,
+    fontSize: 23,
     margin: 10
 },
   goldText: {
