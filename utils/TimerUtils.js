@@ -23,6 +23,22 @@ export const millisecondsToHours = ms => {
   return humanized;
 };
 
+export const roundMillisecondsToHours = ms => {
+  const hours = Math.round(ms / 1000 / 60 / 60);
+
+  const humanized = hours.toString()
+
+  return humanized;
+};
+
+export const decMillisecondsToHours = ms => {
+  const hours = Math.round((ms / 1000 / 60 / 60) * 10) / 10
+
+  const humanized = hours.toString()
+
+  return humanized;
+};
+
 export const millisecondsToMinutes = ms => {
   const minutes = Math.floor((ms / 1000 / 60) % 60);
 
@@ -100,3 +116,19 @@ export const newEventTimer = (attrs = {}) => {
   };
   return eventTimer;
 };
+export const processExport = (timers) => {
+  let processedArr = timers.map(({id, isRunning, ...rest}) => rest)
+  processedArr.forEach(function(obj) {
+    obj.Description = obj.title;
+    obj.Date = obj.date;
+    obj.Service_Hours = decMillisecondsToHours(obj.elapsed);
+    obj.Aylus_Event = obj.aylus ? 'Yes':'No';
+    obj.Signature = ''
+    obj.Name = ''
+    delete obj.title
+    delete obj.date
+    delete obj.elapsed
+    delete obj.aylus
+  });
+  return processedArr
+}

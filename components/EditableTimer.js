@@ -1,7 +1,6 @@
 import React from 'react';
 import TimerForm from './TimerForm';
 import Timer from './Timer';
-import {millisecondsToHours, millisecondsToMinutes} from '../utils/TimerUtils';
 
 export default class EditableTimer extends React.Component{
   state = {

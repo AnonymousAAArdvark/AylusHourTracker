@@ -19,6 +19,7 @@ export default class TimePickerModal extends React.Component {
     }
     componentDidMount() {
         const { elapsed } = this.props
+        console.log(elapsed)
         this.setState({
             currElapsed: elapsed,
             prevElapsed: elapsed,
