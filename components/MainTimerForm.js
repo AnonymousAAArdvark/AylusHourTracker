@@ -75,7 +75,6 @@ export default class MainTimerForm extends React.Component {
     const {label, show, mode, displayFormat, value } = this.state;
      return(
       <DateTimePicker
-        date={Platform.OS === 'ios' ? (value ? new Date(value) : new Date()):(value ? new Date() : new Date())}
         isVisible={show}
         mode={mode}
         onConfirm={this.handleDatePicked}

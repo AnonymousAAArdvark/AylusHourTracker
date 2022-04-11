@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Alert, StyleSheet, Text, TouchableOpacity, View, Platform, TextInput, AsyncStorage} from "react-native";
+import { Alert, StyleSheet, Text, TouchableOpacity, View, Platform, TextInput } from "react-native";
 import TimerButton from '../components/TimerButton';
 import Modal from 'react-native-modal';
 import exportXlsx from '../components/ExportXlsx';
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     },
     modalView: {
         margin: 0,
-        backgroundColor: "#eeeeee",
+        backgroundColor: Platform.OS === 'ios' ? "#eeeeee":'white',
         borderRadius: 10,
         padding: 15,
         alignItems: "center",
