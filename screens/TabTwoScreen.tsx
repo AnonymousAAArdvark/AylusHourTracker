@@ -42,9 +42,9 @@ export default class App extends React.Component {
       const timersString = await AsyncStorage.getItem('@SavedEvents');
       const compactString = await AsyncStorage.getItem('@compactMode');
       if (timersString !== null){
-        // AsyncStorage.getAllKeys()
-        //   .then(keys => AsyncStorage.multiRemove(keys))
-        //   .then(() => alert('success'));
+      //    AsyncStorage.getAllKeys()
+      //      .then(keys => AsyncStorage.multiRemove(keys))
+      //      .then(() => alert('success'));
         let caughtTimers = JSON.parse(timersString);
         this.setState({
           timers: caughtTimers
